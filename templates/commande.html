@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Passe Une Commande</title>
+</head>
+<body style="background-color: #76b9e8">
+	<h1 style="text-align: center; border: solid black 3px; border-radius: 10px; background-color: #8df542;">Mes Manquants</h1>
+	<div style="display: flex;flex-wrap: wrap;">
+	<div style="border: solid 2px green; width: 45%; padding-left: 10px; margin: 20px; border-radius: 10px;">
+	<h3 style="font-size: 30px; text-align: center;">Commande des Médicaments</h3>
+	<form action="add/" method="POST">{% csrf_token %}
+		<input type="text" name="name" required autofocus style="border-radius: 10px; font-size: 24px;outline: none;">
+		<input type="submit" value="Ajouter" style="border-radius: 10px; background-color: #eb6e34; width: 100px; height: 33px;">
+	</form>
+		
+
+
+	{% for item in medocs %}
+		{% if item.med_cmded == True %}
+			<p>
+			<div style="border: solid black 2px; border-radius: 20px; display: inline-block; padding: 4px; margin: 5px; background-color: green;font-weight: bold; text-transform: uppercase;" id="{{item.id}}">
+			<form method="POST" action="delete/{{item.id}}/" id="{{item.id}}" style="float: left;"> {% csrf_token %}
+				<input type="submit" name="delete" value="✘" >
+			</form>
+			<form method="POST" action="mark/{{item.id}}/" style="float: left;"> {% csrf_token %}
+				<input type="submit" name="selected" value="✓">
+
+			</form>
+			{{item.name}}
+		</div>
+		</p>
+
+		{% else  %}
+			<p>
+				<div style="border: solid black 2px; border-radius: 20px; display: inline-block; padding: 4px; margin: 5px; background-color: orange;font-weight: bold; text-transform: uppercase;" id="{{item.id}}">
+				<form method="POST" action="delete/{{item.id}}/" id="{{item.id}}" style="float: left;"> {% csrf_token %}
+					<input type="submit" name="delete" value="✘" >
+				</form>
+				<form method="POST" action="mark/{{item.id}}/" style="float: left;"> {% csrf_token %}
+					<input type="submit" name="selected" value="✓">
+
+				</form>
+				{{item.name}}
+			</div>
+			</p>
+		{% endif %}
+	{% endfor %}
+		
+	</div>
+<!--------------------------------------------------------------------------------------------------------->
+	<div style="border: solid 2px red; width: 45%; padding-left: 10px; margin: 20px; border-radius: 10px">
+		<h3 style="margin-top: 10px; font-size:27px;text-align: center;">Commande des Produits Paramedicaux et Cosmetiques</h3>
+		<form action="addArt/" method="POST">{% csrf_token %}
+		<input type="text" name="nameart" required style="border-radius: 10px; font-size: 24px;outline: none;">
+		<input type="submit" value="Ajouter" style="border-radius: 10px; background-color: #eb6e34; width: 100px; height: 33px;">
+	</form>
+
+
+{% for art in arts %}
+		{% if art.art_cmded == True %}
+			<p>
+			<div style="border: solid black 2px; border-radius: 20px; display: inline-block; padding: 4px; margin: 5px; background-color: green;font-weight: bold; text-transform: uppercase;" id="{{art.id}}">
+			<form method="POST" action="deleteart/{{art.id}}/" id="{{art.id}}" style="float: left;"> {% csrf_token %}
+				<input type="submit" name="delete" value="✘" >
+			</form>
+			<form method="POST" action="markart/{{art.id}}/" style="float: left;"> {% csrf_token %}
+				<input type="submit" name="selected" value="✓">
+
+			</form>
+			{{art.nameart}}
+		</div>
+		</p>
+
+		{% else  %}
+			<p>
+				<div style="border: solid black 2px; border-radius: 20px; display: inline-block; padding: 4px; margin: 5px; background-color: orange;font-weight: bold; text-transform: uppercase;" id="{{art.id}}">
+				<form method="POST" action="deleteart/{{art.id}}/" id="{{art.id}}" style="float: left;"> {% csrf_token %}
+					<input type="submit" name="delete" value="✘" >
+				</form>
+				<form method="POST" action="markart/{{art.id}}/" style="float: left;"> {% csrf_token %}
+					<input type="submit" name="selected" value="✓">
+
+				</form>
+				{{art.nameart}}
+			</div>
+			</p>
+		{% endif %}
+	{% endfor %}
+
+
+
+
+
+<!--
+	{% for art in arts %}
+		<p>
+			<form method="POST" action="deleteart/{{art.id}}/"> {% csrf_token %}
+				<input type="submit" value="✓">
+				<input type="submit" name="delete" value="X">
+				{{art.nameart}}
+			</form>
+		</p>
+	{% endfor %}
+
+	</div>
+
+	</div>
+-->
+</body>
+</html>
