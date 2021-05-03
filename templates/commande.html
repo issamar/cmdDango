@@ -18,7 +18,7 @@
 	{% for item in medocs %}
 		{% if item.med_cmded == True %}
 			<p>
-			<div style="border: solid black 2px; border-radius: 20px; display: inline-block; padding: 4px; margin: 5px; background-color: green;font-weight: bold; text-transform: uppercase;" id="{{item.id}}">
+			<div style="border: solid black 2px; border-radius: 20px; display: inline-block; padding: 4px; margin: 0px; background-color: green;font-weight: bold; text-transform: uppercase;" id="{{item.id}}">
 			<form method="POST" action="delete/{{item.id}}/" id="{{item.id}}" style="float: left;"> {% csrf_token %}
 				<input type="submit" name="delete" value="✘" >
 			</form>
@@ -32,7 +32,7 @@
 
 		{% else  %}
 			<p>
-				<div style="border: solid black 2px; border-radius: 20px; display: inline-block; padding: 4px; margin: 5px; background-color: orange;font-weight: bold; text-transform: uppercase;" id="{{item.id}}">
+				<div style="border: solid black 2px; border-radius: 20px; display: inline-block; padding: 4px; margin: 0px; background-color: orange;font-weight: bold; text-transform: uppercase;" id="{{item.id}}">
 				<form method="POST" action="delete/{{item.id}}/" id="{{item.id}}" style="float: left;"> {% csrf_token %}
 					<input type="submit" name="delete" value="✘" >
 				</form>
@@ -59,7 +59,7 @@
 {% for art in arts %}
 		{% if art.art_cmded == True %}
 			<p>
-			<div style="border: solid black 2px; border-radius: 20px; display: inline-block; padding: 4px; margin: 5px; background-color: green;font-weight: bold; text-transform: uppercase;" id="{{art.id}}">
+			<div style="border: solid black 2px; border-radius: 20px; display: inline-block; padding: 4px; margin: 0px; background-color: green;font-weight: bold; text-transform: uppercase;" id="{{art.id}}">
 			<form method="POST" action="deleteart/{{art.id}}/" id="{{art.id}}" style="float: left;"> {% csrf_token %}
 				<input type="submit" name="delete" value="✘" >
 			</form>
@@ -73,7 +73,7 @@
 
 		{% else  %}
 			<p>
-				<div style="border: solid black 2px; border-radius: 20px; display: inline-block; padding: 4px; margin: 5px; background-color: orange;font-weight: bold; text-transform: uppercase;" id="{{art.id}}">
+				<div style="border: solid black 2px; border-radius: 20px; display: inline-block; padding: 4px; margin: 0px; background-color: orange;font-weight: bold; text-transform: uppercase;" id="{{art.id}}">
 				<form method="POST" action="deleteart/{{art.id}}/" id="{{art.id}}" style="float: left;"> {% csrf_token %}
 					<input type="submit" name="delete" value="✘" >
 				</form>
