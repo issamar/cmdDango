@@ -2,14 +2,86 @@
 <html>
 <head>
 	<title>La gestion de la Pharmacie</title>
+
+	<style>
+		h1{
+			text-align: center; 
+			border: solid red 2px; 
+			border-radius: 20px;
+			padding: 10px; 
+			background-color: #fca503; 
+			text-transform: uppercase;
+		}
+
+		.button{
+			border: solid black 2px;
+			border-radius: 20px;
+			font-size: 32px;
+			padding: 10px;
+			margin: 20px;
+			float: left;
+			
+
+		}
+		#container{
+			
+			padding-left: 150px;
+			text-align: center;
+		
+		}
+		#cmd{
+			background-color: #d44b39;
+		}
+		#lab{
+			background-color: #30b05a; 
+		}
+		#clo{
+			background-color: #522787;
+
+		}
+		#logout{
+			background-color: #db0d0d;
+		}
+
+
+	</style>
+	<script >
+		function hoveringcmd(){
+			document.getElementById('cmd').style.backgroundColor = "#f5d142";
+		}
+		function hoveringlab(){
+			document.getElementById('lab').style.backgroundColor = "#f5d142";
+		}
+		function hoveringclo(){
+			document.getElementById('clo').style.backgroundColor = "#f5d142";
+		}
+		function hoveringlogout(){
+			document.getElementById('logout').style.backgroundColor = "#f5d142";
+		}
+
+	</script>
+	
 </head>
-<body>
-	<h1> Gérer la Pharmacie dans un seul coin</h1>
+<body style="background-color: #74cfbf">
+	<h1 style=""> Gérer   la Pharmacie   dans  un  seul   coin</h1>
+	<div id="container">
+		<div  >
+			<a href="{% url 'commande' %}" ><button class="button" id="cmd" onclick="hoveringcmd()">Commander</button></a>
+		</div>
+		<div  >
+			<a href=""><button class="button" id="lab" onclick="hoveringlab()">Laboratoire</button></a>
+		</div>
+		<div>
+			<a href=""><button class="button" id="clo"  onclick="hoveringclo()">Cloturer la Journée</button></a>
+		</div>
+		<div >
+			<a href="{% url 'logout' %}"><button class="button" id="logout" onclick="hoveringlogout()"> Logout</button></a>
 
-
-	<a href="{% url 'commande' %}">Ajouter une Commande</a>
-	<a href="">Laboratoire</a>
-	<a href="">Cloturer la Journée</a>
-	<a href="{% url 'logout' %}">Logout</a>
+		
+	</div>
+	
+	
+	
+</div>
 </body>
 </html>
