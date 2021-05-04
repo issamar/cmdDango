@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .models import Cmd, CmdArt
 import sys
+from django.contrib.auth.decorators import login_required
 # Create your views here.
-
+@login_required(login_url='login')
 def commandeAdd(request): # function to display medocs and articles
 	all_cmd = Cmd.objects.all()
 	all_cmd_art = CmdArt.objects.all()
@@ -14,7 +15,7 @@ def commandeAdd(request): # function to display medocs and articles
 	}
 	return render(request, 'commande.html', context)
 
-
+@login_required(login_url='login')
 def addView(request): # function to add medoc to the database
 	all_cmd_names = Cmd.objects.values_list('name', flat=True)
 	mdc = Cmd(name=request.POST['name'])
@@ -26,7 +27,7 @@ def addView(request): # function to add medoc to the database
 	}
 	return HttpResponseRedirect('/commande')
 
-
+@login_required(login_url='login')
 def markView(request, item_id): # function to mark commanded medocs
 	mark_id = Cmd.objects.get(id=item_id)
 	mark_id.med_cmded = True 
@@ -35,14 +36,14 @@ def markView(request, item_id): # function to mark commanded medocs
 	return HttpResponseRedirect('/commande')
 
 
-
+@login_required(login_url='login')
 
 def deleteView(request, item_id): # function to delete medoc from db
 	itemToDelete = Cmd.objects.get(id=item_id)
 	itemToDelete.delete()
 	return HttpResponseRedirect('/commande')
 
-
+@login_required(login_url='login')
 def addArtView(request): # function to add artcles to the database
 	all_cmd_names_art = CmdArt.objects.values_list('nameart', flat=True)
 	art = CmdArt(nameart=request.POST['nameart'])
@@ -57,12 +58,13 @@ def addArtView(request): # function to add artcles to the database
 	}
 	return HttpResponseRedirect('/commande')
 
-
+@login_required(login_url='login')
 def deleteArtView(request, art_id): # a function to remove articles from database
 	artToDelete = CmdArt.objects.get(id=art_id)
 	artToDelete.delete()
 	return HttpResponseRedirect('/commande')
 
+@login_required(login_url='login')
 def markViewArt(request, art_id): #function to mark commanded articls
 	mark_id_art = CmdArt.objects.get(id=art_id)
 	mark_id_art.art_cmded = True 
