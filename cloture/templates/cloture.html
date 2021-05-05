@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cloture</title>
+	<style>
+		label{
+			display: none;
+		}
+	
+		.input{
+			font-size: 24px;
+			border-radius: 20px;
+			outline: none;
+			border-color:#5efc03; 
+			padding: 5px;
+			margin: 10px;
+		}
+		#id_username{
+			font-size: 24px;
+			border-radius: 20px;
+			outline: none;
+			padding: 5px;
+			margin: 10px;
+			background-color: orange;
+		}
+		#send{
+			font-size: 24px;
+			border-radius: 20px;
+			background-color: green;
+			padding: 10px;
+			outline: none;
+			margin-left: 80px
+
+		}
+		#send:hover{
+			background-color: red;
+		}
+		#container{
+			display: flex;
+			flex-wrap: wrap;
+		}
+		#subcontainer1{
+			border:solid black 5px;
+			width: 45%;
+			border-radius: 15px;
+			margin: 10px;
+
+		}
+		#subcontainer2{
+			border:solid black 5px;
+			width: 45%;
+			border-radius: 15px;
+			margin: 10px;
+			text-align: center;
+
+		}
+		form{
+			text-align: center;
+			padding: 20px;
+		}
+		h1{
+			text-align: center;
+			text-transform: uppercase;
+			color: #6f8066;
+		}
+		.btn{
+			border-radius: 15px;
+			border-color: #323463;
+			font-size: 30px;
+			padding: 10px;
+			margin: 50px;
+		}
+		.btn:hover{
+			background-color: green;
+		}
+		#edit{
+			margin-top: 140px;
+		}
+	</style>
+</head>
+<body>
+<div id="container">
+	<div id="subcontainer1">
+		<h1> Cloturer la journée</h1>
+		<form method="POST" action="">{% csrf_token %}
+			{{form.as_p}}
+			<input type="submit" name="valider" value="Envoyer" id="send">
+		</form>
+	</div>
+	<div id="subcontainer2">
+		
+		<a href=""><button class="btn" id="edit">Editer les données</button></a>
+		<a href="{% url 'visualiser' %}"><button class="btn" >Visualiser l'ecart</button></a>
+		<a href=""><button class="btn" >Suivi des bordereax</button></a>
+
+	</div>
+</div>
+</body>
+</html>
