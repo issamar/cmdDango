@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Visualiser et Editer</title>
+	<style>
+		table, th, td{
+			border:1px solid black;
+			border-collapse: collapse;
+			padding: 10px
+		}
+	</style>
+</head>
+<body>
+	<h1> Les données journalieres <span><a href="/" style="float: right;">HomePage</a></span></h1>
+	
+	<table>
+		<tr>
+			<th>Creation Date</th>
+			<th> Username</th>
+			<th> Argent de Demarrage </th>
+			<th>Argent de Cloture</th>
+			<th>Biais de Cloture</th>
+			<th> Argent d'ecart</th>
+			<th>Details</th>
+			<th>Wasfa</th>
+			<th>Le montant Réal</th>
+			<th>Ecart</th>
+		</tr>
+		{% for data in getdata %}
+	
+			<tr id="{{data.id}}">
+				<td> {{data.creation_date}}</td>
+				<td> {{data.username}}</td>
+				<td> {{data.start_money}} </td>
+				<td> {{data.closure_money}}</td>
+				<td> {{data.closure_paper}} </td>
+				<td> {{data.money}}</td>
+				<td> {{data.details}}</td>
+				<td> {{data.wasfa}} </td>
+				<td> {{data.real_money}} </td>
+				<td> {{data.ecart}}</td>
+				<td><a href=" {% url 'editad' data.id %} ">Edit</a></td>
+			</tr>
+
+		{% endfor %}
+	</table>
+
+
+
+	
+
+</body>
+</html>

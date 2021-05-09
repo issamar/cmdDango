@@ -51,3 +51,21 @@ class ClosureForm(forms.ModelForm):
 
 
 		}
+
+
+
+class PartielClosureForm(forms.ModelForm):
+	class Meta:
+		model = Closure
+		fields = ['money', 'details']
+		widgets = {
+			'money' : forms.NumberInput(attrs={
+				'id':'mny',
+				'class' : 'input',
+				'placeholder' : "La somme d'ecart"
+				}),
+			'details' : forms.TextInput(attrs={
+				'id':'dtls',
+				'class' : 'input',
+				'placeholder' : "Details d'ecart"
+				}),}

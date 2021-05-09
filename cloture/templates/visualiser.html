@@ -16,29 +16,20 @@
 		<tr>
 			<th>Creation Date</th>
 			<th> Username</th>
-			<th>Start money</th>
 			<th>closing money</th>
-			<th>Closing Paper</th>
 			<th> Money</th>
 			<th>Details</th>
-			<th>Wasfa</th>
-			<th>Real Money</th>
 			<th>Ecart</th>
 		</tr>
 		{% for data in datas %}
 		<tr id="{{data.id}}">
 			<th>{{data.creation_date}}</th>
 			<th>{{data.username}}</th>
-			<th>{{data.start_money}}</th>
 			<th>{{data.closure_money}}</th>
-			<th>{{data.closure_paper}}</th>
 			<th>{{data.money}}</th>
 			<th>{{data.details}}</th>
-			<th>{{data.wasfa}}</th>
-			<th>{{data.real_money}}</th>
 			<th>{{data.ecart}}</th>
-			<th><a href="">Edit</a></th>
-			<th><input type="submit" name="delete" value="Delete"></th>
+			<th><a href="{% url 'editus' data.id %}">Edit</a></th>
 		</tr>
 		{% endfor %}
 	</table>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Cloture</title>
+	<title>Editer la Cloture</title>
 	<style>
 		label{
 			display: none;
@@ -81,18 +81,11 @@
 <body>
 <div id="container">
 	<div id="subcontainer1">
-		<h1> Cloturer la journée</h1>
+		<h1> Editer la Cloture</h1>
 		<form method="POST" action="">{% csrf_token %}
 			{{form.as_p}}
-			<input type="submit" name="valider" value="Envoyer" id="send">
+			<input type="submit" name="edit " value="Editer" id="send">
 		</form>
-	</div>
-	<div id="subcontainer2">
-		
-		<a href="{% url 'visedit' %}"><button class="btn" id="edit">Editer les données</button></a>
-		<a href="{% url 'visualiser' %}"><button class="btn" >Visualiser l'ecart</button></a>
-		<a href=""><button class="btn" >Suivi des bordereax</button></a>
-
 	</div>
 </div>
 </body>
