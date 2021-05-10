@@ -12,3 +12,18 @@ class Closure(models.Model):
 	wasfa = models.DecimalField(decimal_places=2, max_digits=8, blank=True, null=True, default=0)
 	real_money = models.DecimalField(decimal_places=2, max_digits=8, null=True, blank=True)
 	ecart = models.DecimalField(decimal_places=2, max_digits=8, null=True, blank=True)
+
+
+class Bordereaux(models.Model):
+	pay_ctr = models.CharField(max_length=20)
+	n_brd = models.IntegerField(unique=True)
+	dt_clo = models.DateField()
+	n_ord = models.IntegerField()
+	m_brd = models.DecimalField(decimal_places=2, max_digits=8)
+	dt_depot = models.DateField(null=True, blank=True)
+	dt_jrl = models.DateField(null=True, blank=True)
+	n_ord_jrl = models.IntegerField( null=True, blank=True)
+	m_jrl = models.DecimalField(decimal_places=2, max_digits=8, null=True, blank=True)
+	dt_pay = models.DateField( null=True, blank=True)
+	defr = models.DecimalField(decimal_places=2, max_digits=8, null=True, blank=True)
+	payement = models.BooleanField(default=False)

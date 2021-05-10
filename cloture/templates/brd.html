@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Suivi des Bordereaux</title>
+	<style >
+		h2{
+			text-align: center;
+			
+			border-radius: 20px;
+			background-color: #1d38bf;
+			padding: 5px;
+			margin: 5px;
+
+		}
+		label {display: none;}
+		.input{
+			border-radius: 20px;
+			border-color: #15246e;
+			padding: 10px;
+			font-size: 20px;
+			outline: none;
+			margin: 10px;
+
+		}
+
+		#aj_container{
+			border : solid black 2px;
+			border-radius: 10px;
+			margin: auto;
+			text-align: center;
+			width: 50%;
+		}
+		#valid{
+			width: 100px;
+			background-color: green;
+			border-radius: 20px;
+			font-size: 20px;
+			padding: 10px;
+			margin: auto;
+		}
+		#ctr{
+			text-transform: uppercase;
+		}
+		#disp_container{
+			border: solid black 3px;
+			float: left;
+			margin: 15px;
+		}
+		table, th, td{
+			border:1px solid black;
+			border-collapse: collapse;
+			padding: 10px
+			margin:auto;
+			font-size: 20px
+		}
+	</style>
+</head>
+<body>
+	<div id="aj_container">
+		<h2> Ajouter un Bordereau </h2>
+		<form method="POST" action="">{% csrf_token %}
+			
+			{{form.as_p}}
+			<input type="submit" name="valider" value="Valider" id="valid">
+
+
+		</form>
+	</div>
+	<div id="disp_container">
+		<table>
+			<tr>
+				<th>Centre</th>
+				<th>N° de brd</th>
+				<th>Date de Cloture</th>
+				<th>N° ORD</th>
+				<th>Montant de brd</th>
+				<th>Date de Depot</th>
+				<th>Date de Journal</th>
+				<th>N° ORD Jrl</th>
+				<th>Montand Jrl</th>
+				<th>Date de Payement</th>
+				<th> Ecart</th>
+				<th>Payement</th>
+			</tr>
+			
+
+		
+		{% for brd in brds %}
+			<tr>
+				<td> {{brd.pay_ctr}} </td>
+				<td> {{brd.n_brd}} </td>
+				<td> {{brd.dt_clo}} </td>
+				<td> {{brd.n_ord}} </td>
+				<td> {{brd.m_brd}} </td>
+				<td> {{brd.dt_depot}} </td>
+				<td> {{brd.dt_jrl}} </td>
+				<td> {{brd.n_ord_jrl}} </td>
+				<td> {{brd.m_jrl}} </td>
+				<td> {{brd.dt_pay}} </td>
+				<td> {{brd.defr}} </td>
+				<td> {{brd.payement}} </td>
+			</tr>
+
+		{% endfor %}
+		</table>
+	</div>
+</body>
+</html>

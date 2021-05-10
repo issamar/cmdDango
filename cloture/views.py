@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
-from .forms import ClosureForm, PartielClosureForm
-from .models import Closure
+from .forms import ClosureForm, PartielClosureForm, BordereauxForm
+from .models import Closure, Bordereaux
 from django.views.generic import UpdateView
 import sys
+from django.contrib.auth.decorators import login_required
+from gestion_accueil.decorators import unauthenticated_user, allowed_users
 # Create your views here.
-
+@login_required(login_url='login')
 def closure(request):
 	form = ClosureForm(request.POST or None)
 	if form.is_valid():
@@ -16,7 +18,7 @@ def closure(request):
 	}
 	return render(request,'cloture.html', context)
 
-
+@login_required(login_url='login')
 def showData(request):
 	some_data = Closure.objects.all().order_by('-id')[:10]
 	context = {
@@ -24,15 +26,18 @@ def showData(request):
 	}
 	return render(request,'visualiser.html', context)
 
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def visulizeToEdit(request):
-	get_data = Closure.objects.all()
+	get_data = Closure.objects.all().order_by('-id')
 	context = {
 		'getdata' : get_data
 	}
 	return render(request,'visedit.html',context)
 
 
-
+@login_required(login_url='login')
 def editAdForm(request, pk):
 	row = Closure.objects.get(id=pk)
 	form = ClosureForm(instance=row)
@@ -69,7 +74,7 @@ def editAdForm(request, pk):
 	}
 	return render(request,'editad.html', context)
 
-
+@login_required(login_url='login')
 def userEdition(request, pk):
 	idid = Closure.objects.get(id=pk)
 	form = PartielClosureForm(instance=idid)
@@ -87,3 +92,21 @@ def userEdition(request, pk):
 		'form' : form
 	}
 	return render(request,'useredit.html', context)
+
+
+	# suivi des borderaux views
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def convention(request):
+	all_brd = Bordereaux.objects.all()
+	form = BordereauxForm(request.POST or None)
+	if request.method == 'POST':
+		if form.is_valid():
+			form.save()
+		form = BordereauxForm()
+	context = {
+		'form' : form, 'brds' : all_brd
+		}
+	return render(request,'brd.html',context)
+
+

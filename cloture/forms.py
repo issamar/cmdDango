@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Closure
+from .models import Closure, Bordereaux
 
 
 class ClosureForm(forms.ModelForm):
@@ -69,3 +69,43 @@ class PartielClosureForm(forms.ModelForm):
 				'class' : 'input',
 				'placeholder' : "Details d'ecart"
 				}),}
+
+
+class BordereauxForm(forms.ModelForm):
+	class Meta:
+		model = Bordereaux
+		fields = ['pay_ctr','n_brd','dt_clo','n_ord','m_brd','dt_depot']
+		widgets = {
+			'pay_ctr' : forms.TextInput(attrs={
+				'id' : 'ctr',
+				'class' : 'input',
+				'placeholder' : 'Centre Payeur'
+				}),
+			'n_brd' : forms.NumberInput(attrs={
+				'id' : 'nbrd',
+				'class' : 'input',
+				'placeholder' : 'Numero de Bordereau'
+				}),
+			'dt_clo' : forms.DateInput(attrs={
+				'id' : 'dt_clo',
+				'class' : 'input',
+				'placeholder' : 'Date de Cloture',
+				'type' : 'date'
+				}),
+			'n_ord' : forms.NumberInput(attrs={
+				'id' : 'nord',
+				'class' : 'input',
+				'placeholder' : 'Nombre des Ord'
+				}),
+			'm_brd' : forms.NumberInput(attrs={
+				'id' : 'mbrd',
+				'class' : 'input',
+				'placeholder' : 'Montant de Bordereau'
+				}),
+			'dt_depot' : forms.DateInput(attrs={
+				'id' : 'dtdepot',
+				'class' : 'input',
+				'placeholder' : 'Date de depot',
+				'type' : 'date'
+				}),
+		}

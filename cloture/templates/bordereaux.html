@@ -1,0 +1,9 @@
+{% extends 'brd.html' %}
+
+{% content block %}
+	{% for brd in brds %}
+		{{brd.pay_ctr}}
+
+	{% endfor %}
+
+{% endblock %}
