@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Editer Le Bordereau </title>
+	<style >
+		input {
+			border-radius: 20px;
+			border-color: #fc034e;
+			padding: 10px;
+			font-size: 20px;
+			outline: none;
+			margin: 10px;
+		}
+		
+		#container1{
+			float: left;
+			margin: 20px;
+			text-align: center;
+		}
+		#container2{
+			float: right;
+			margin: 20px;
+			text-align: center;
+		}
+		#container{
+			border: solid black 2px;
+			border-radius: 20px;
+			border: solid black 2px;
+			border-radius: 20px;
+			height: 100%;
+			display: table;
+			margin: auto;
+		}
+		#pay{
+			border: solid 2px;
+			border-radius: 20px;
+			border-color: #fc034e;
+			padding: 10px;
+			font-size: 20px;
+			outline: none;
+			margin: 10px;
+		}
+		h1{text-align: center;}
+	</style>
+</head>
+<body>
+	<h1> Editer Le Bordereau </h1>
+	<div id="container">
+		<form method="POST" action="">{% csrf_token %}
+			<div id="container1">
+				<p>{{form.pay_ctr}}</p>
+				<p>{{form.n_brd}}</p>
+				<p> Date de Cloture :</p>
+				<p >{{form.dt_clo}}</p>
+				<p>{{form.n_ord}}</p>
+				<p>{{form.m_brd}}</p>
+				<p>Date de Depot :</p>
+				<p>{{form.dt_depot}}</p>
+			</div>
+			<div id="container2">
+				<p>Date de Journal</p>
+				<p>{{form.dt_jrl}}</p>
+				<p>{{form.n_ord_jrl}}</p>
+				<p>{{form.m_jrl}}</p>
+				<p>Date Présumé de Payement</p>
+				<p>{{form.dt_pay}}</p>
+				<p>{{form.defr}}</p>
+				<p id="pay" >Etat de Payement : {{form.payement}}</p>
+				<input type="submit" name="Editer" value="Editer">
+			</div>
+
+
+		</form>
+	</div>	
+</body>
+</html>

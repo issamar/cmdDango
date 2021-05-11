@@ -15,7 +15,7 @@
 		label {display: none;}
 		.input{
 			border-radius: 20px;
-			border-color: #15246e;
+			border-color: #fc034e;
 			padding: 10px;
 			font-size: 20px;
 			outline: none;
@@ -53,6 +53,11 @@
 			margin:auto;
 			font-size: 20px
 		}
+		h6{
+			padding: 0px;
+			margin: 0px;
+		}
+	
 	</style>
 </head>
 <body>
@@ -60,7 +65,14 @@
 		<h2> Ajouter un Bordereau </h2>
 		<form method="POST" action="">{% csrf_token %}
 			
-			{{form.as_p}}
+			<p>{{form.pay_ctr}}</p>
+			<p>{{form.n_brd}}</p>
+			<p> Date de Cloture :</p>
+			<p >{{form.dt_clo}}</p>
+			<p>{{form.n_ord}}</p>
+			<p>{{form.m_brd}}</p>
+			<p>Date de Depot :</p>
+			<p>{{form.dt_depot}}</p>
 			<input type="submit" name="valider" value="Valider" id="valid">
 
 
@@ -80,6 +92,7 @@
 				<th>Montand Jrl</th>
 				<th>Date de Payement</th>
 				<th> Ecart</th>
+				<th>E.Ord</th>
 				<th>Payement</th>
 			</tr>
 			
@@ -88,7 +101,7 @@
 		{% for brd in brds %}
 			<tr>
 				<td> {{brd.pay_ctr}} </td>
-				<td> {{brd.n_brd}} </td>
+				<td> <a href="{%url 'editbrd' brd.id %}">{{brd.n_brd}}</a> </td>
 				<td> {{brd.dt_clo}} </td>
 				<td> {{brd.n_ord}} </td>
 				<td> {{brd.m_brd}} </td>
@@ -98,6 +111,7 @@
 				<td> {{brd.m_jrl}} </td>
 				<td> {{brd.dt_pay}} </td>
 				<td> {{brd.defr}} </td>
+				<td>{{brd.def_o}}</td>
 				<td> {{brd.payement}} </td>
 			</tr>
 

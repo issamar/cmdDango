@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from .forms import ClosureForm, PartielClosureForm, BordereauxForm
+from .forms import ClosureForm, PartielClosureForm, BordereauxForm, EditBrdFrom
 from .models import Closure, Bordereaux
 from django.views.generic import UpdateView
 import sys
 from django.contrib.auth.decorators import login_required
 from gestion_accueil.decorators import unauthenticated_user, allowed_users
+import datetime
 # Create your views here.
 @login_required(login_url='login')
 def closure(request):
@@ -109,4 +110,36 @@ def convention(request):
 		}
 	return render(request,'brd.html',context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def editBrd(request, pk):
+	get_id = Bordereaux.objects.get(id=pk)
+	form = EditBrdFrom(instance=get_id)
+	if request.method == 'POST':
+		form = EditBrdFrom(request.POST, instance=get_id)
+		if form.is_valid():
+			pure_data = form.cleaned_data
+			get_data = Bordereaux.objects.get(id=pk)
+			#get the date of payement
+			dtjrl = str(pure_data['dt_jrl'])
+			date1 = datetime.datetime.strptime(dtjrl, "%Y-%m-%d")
+			datep = date1 + datetime.timedelta(days=15)
+			get_data.dt_pay = datep
+			#get the ord def
+			nordj = pure_data['n_ord_jrl']
+			nord = pure_data['n_ord']
+			ord_ = nord - nordj
+			get_data.def_o = ord_
+			#get the amount def
+			m_j = pure_data['m_jrl']
+			m_b = pure_data['m_brd']
+			defr = m_b - m_j
+			get_data.defr= defr
+			get_data.save()
+			form.save()
+			return redirect('/cloture/sbrd/')
 
+	context = {
+		'form' : form
+	}
+	return render(request, 'editbrd.html', context)

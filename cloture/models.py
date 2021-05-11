@@ -26,4 +26,5 @@ class Bordereaux(models.Model):
 	m_jrl = models.DecimalField(decimal_places=2, max_digits=8, null=True, blank=True)
 	dt_pay = models.DateField( null=True, blank=True)
 	defr = models.DecimalField(decimal_places=2, max_digits=8, null=True, blank=True)
+	def_o = models.IntegerField()
 	payement = models.BooleanField(default=False)

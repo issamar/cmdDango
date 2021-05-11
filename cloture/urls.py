@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import closure, showData, visulizeToEdit, editAdForm, userEdition, convention
+from .views import closure, showData, visulizeToEdit, editAdForm, userEdition, convention, editBrd
 
 
 
@@ -9,5 +9,6 @@ urlpatterns = [
 	path('viseforedit/', visulizeToEdit, name="visedit" ),
 	path('editad/<int:pk>', editAdForm, name="editad" ),
 	path('useredit/<int:pk>', userEdition, name="editus" ),
-	path('sbrd/', convention, name='convention')
+	path('sbrd/', convention, name='convention'),
+	path('editbrd/<int:pk>', editBrd, name='editbrd')
 	]
