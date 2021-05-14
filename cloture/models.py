@@ -16,7 +16,7 @@ class Closure(models.Model):
 
 class Bordereaux(models.Model):
 	pay_ctr = models.CharField(max_length=20)
-	n_brd = models.IntegerField(unique=True)
+	n_brd = models.CharField(unique=True, max_length=200)
 	dt_clo = models.DateField()
 	n_ord = models.IntegerField()
 	m_brd = models.DecimalField(decimal_places=2, max_digits=8)
@@ -26,5 +26,5 @@ class Bordereaux(models.Model):
 	m_jrl = models.DecimalField(decimal_places=2, max_digits=8, null=True, blank=True)
 	dt_pay = models.DateField( null=True, blank=True)
 	defr = models.DecimalField(decimal_places=2, max_digits=8, null=True, blank=True)
-	def_o = models.IntegerField()
+	def_o = models.IntegerField(default=0)
 	payement = models.BooleanField(default=False)

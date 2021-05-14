@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Suivi des Bordereaux</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 	<style >
 		h2{
 			text-align: center;
@@ -12,7 +13,7 @@
 			margin: 5px;
 
 		}
-		label {display: none;}
+		
 		.input{
 			border-radius: 20px;
 			border-color: #fc034e;
@@ -28,7 +29,8 @@
 			border-radius: 10px;
 			margin: auto;
 			text-align: center;
-			width: 50%;
+			width: 30%;
+			padding: 20px;
 		}
 		#valid{
 			width: 100px;
@@ -36,12 +38,9 @@
 			border-radius: 20px;
 			font-size: 20px;
 			padding: 10px;
-			margin: auto;
+			margin: 10px;
 		}
-		#ctr{
-			text-transform: uppercase;
-		}
-		#disp_container{
+				#disp_container{
 			border: solid black 3px;
 			float: left;
 			margin: 15px;
@@ -49,37 +48,56 @@
 		table, th, td{
 			border:1px solid black;
 			border-collapse: collapse;
-			padding: 10px
+			padding: 7px
 			margin:auto;
-			font-size: 20px
+			font-size: 15px
 		}
 		h6{
 			padding: 0px;
 			margin: 0px;
 		}
+		#message{
+			border:solid black 1px;
+			border-radius: 20px;
+			background-color: #2d9646;
+			font-weight: bold;
+
+		}
+		#navdiv{margin-left: 26%}
 	
 	</style>
 </head>
 <body>
+	<nav class="navbar navbar-light bg-light">
+  		<div id="navdiv">
+  			<a href="{% url 'home' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Page D'Acceuil</button></a>
+		    
+		    <a href="{% url 'visedit' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Editer les données</button></a>
+			
+		    <a href="{% url 'logout' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Logout</button></a>
+		   
+		    
+ 		</div>
+	</nav>
 	<div id="aj_container">
+
 		<h2> Ajouter un Bordereau </h2>
 		<form method="POST" action="">{% csrf_token %}
 			
-			<p>{{form.pay_ctr}}</p>
-			<p>{{form.n_brd}}</p>
-			<p> Date de Cloture :</p>
-			<p >{{form.dt_clo}}</p>
-			<p>{{form.n_ord}}</p>
-			<p>{{form.m_brd}}</p>
-			<p>Date de Depot :</p>
-			<p>{{form.dt_depot}}</p>
+			{{form}}
+			{{form.errors}}
 			<input type="submit" name="valider" value="Valider" id="valid">
 
-
+			{% if messages%}
+			{% for message in messages %}
+			<div id="message">{{message}}</div>
+				
+			{% endfor %}
+			{% endif %}
 		</form>
 	</div>
 	<div id="disp_container">
-		<table>
+		<table class="table table-hover ">
 			<tr>
 				<th>Centre</th>
 				<th>N° de brd</th>
@@ -112,7 +130,7 @@
 				<td> {{brd.dt_pay}} </td>
 				<td> {{brd.defr}} </td>
 				<td>{{brd.def_o}}</td>
-				<td> {{brd.payement}} </td>
+				<td>  {% if brd.payement == True %} Payé {%else%} NonPayé {% endif %}</td>
 			</tr>
 
 		{% endfor %}

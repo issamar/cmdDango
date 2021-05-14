@@ -2,17 +2,52 @@
 <html>
 <head>
 	<title>Passe Une Commande</title>
+	<style>
+		#msg{
+			border: solid red 1px;
+			padding:10px;
+			margin: 10px;
+			text-align: center;
+			background-color: red;
+			border-radius: 20px;
+
+		}
+		li{list-style: none;}
+
+
+	</style>
+	<script
+	  src="https://code.jquery.com/jquery-3.4.1.min.js"
+	  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	  crossorigin="anonymous"></script>
+
+	<script text="javascript">
+	    setTimeout(fade_out, 3000);
+	    function fade_out() {
+	        $("#msg").fadeOut().empty();
+	    }
+	    	
+</script>
 </head>
 <body style="background-color: #76b9e8">
 	<h1 style="text-align: center; border: solid black 3px; border-radius: 10px; background-color: #8df542;">Mes Manquants</h1>
+	{% if messages %}
+		{% for message in messages %}
+			<h3 id="msg">{{message}}</h3>
+
+		{% endfor %}
+	{% endif %}
 	<div style="display: flex;flex-wrap: wrap;">
+		
 	<div style="border: solid 2px green; width: 45%; padding-left: 10px; margin: 20px; border-radius: 10px;">
 	<h3 style="font-size: 30px; text-align: center;">Commande des Médicaments</h3>
+	
+		
 	<form action="add/" method="POST">{% csrf_token %}
 		<input type="text" name="name" required autofocus style="border-radius: 10px; font-size: 24px;outline: none;">
 		<input type="submit" value="Ajouter" style="border-radius: 10px; background-color: #eb6e34; width: 100px; height: 33px;">
 	</form>
-		
+	
 
 
 	{% for item in medocs %}
@@ -50,6 +85,7 @@
 <!--------------------------------------------------------------------------------------------------------->
 	<div style="border: solid 2px red; width: 45%; padding-left: 10px; margin: 20px; border-radius: 10px">
 		<h3 style="margin-top: 10px; font-size:27px;text-align: center;">Commande des Produits Paramedicaux et Cosmetiques</h3>
+		
 		<form action="addArt/" method="POST">{% csrf_token %}
 		<input type="text" name="nameart" required style="border-radius: 10px; font-size: 24px;outline: none;">
 		<input type="submit" value="Ajouter" style="border-radius: 10px; background-color: #eb6e34; width: 100px; height: 33px;">

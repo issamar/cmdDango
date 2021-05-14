@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from .models import Cmd, CmdArt
 import sys
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 # Create your views here.
 @login_required(login_url='login')
 def commandeAdd(request): # function to display medocs and articles
@@ -22,6 +23,8 @@ def addView(request): # function to add medoc to the database
 	mdc_name = mdc.name
 	if mdc_name not in all_cmd_names:
 		mdc.save()
+	else:
+		messages.error (request, 'Ce Medicament/Article Existe Deja')
 	context = {
 		'mdc' : mdc
 	}
@@ -50,6 +53,8 @@ def addArtView(request): # function to add artcles to the database
 	art_name = art.nameart
 	if art_name not in all_cmd_names_art:
 		art.save()
+	else:
+		messages.error (request, 'Ce Medicament/Article Existe Deja', extra_tags='art')
 	# art = CmdArt(nameart=request.POST['nameart'])
 	# if art.is_valid():
 	# 	art.save()

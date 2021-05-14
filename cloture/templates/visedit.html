@@ -2,30 +2,39 @@
 <html>
 <head>
 	<title>Visualiser et Editer</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 	<style>
 		table, th, td{
 			border:1px solid black;
 			border-collapse: collapse;
 			padding: 10px
 		}
+		#h{text-decoration: none;}
+		}
 		
 	</style>
 </head>
 <body>
-	<h1> Les données journalieres <span><a href="/" style="float: right;">HomePage</a></span></h1>
-	
-	<table>
+	<nav class="navbar navbar-light bg-light">
+	  <div class="container-fluid">
+	    <h1 class="navbar-brand">Les données journalieres</h1>
+		    <form class="d-flex">
+		      <button class="btn btn-outline-success" type="submit"><a id="h" href="/" style="float: right;">Page d'acceuil</a></button>
+		    </form>
+	  	</div>
+	</nav>
+	<table class="table table-hover ">
 		<tr id="tr1">
 			<th>Creation Date</th>
 			<th> Username</th>
-			<th> Argent de Demarrage </th>
-			<th>Argent de Cloture</th>
+			<th> Arg Drg</th>
+			<th>Arg Clo</th>
 			<th>Biais de Cloture</th>
-			<th> Argent d'ecart</th>
+			<th> Ecart</th>
 			<th>Details</th>
 			<th>Wasfa</th>
-			<th>Le montant Réal</th>
-			<th>Ecart</th>
+			<th>Caisse</th>
+			<th>Ecart Estimé</th>
 		</tr>
 		{% for data in getdata %}
 	
