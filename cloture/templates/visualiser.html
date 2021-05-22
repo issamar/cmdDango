@@ -9,10 +9,24 @@
 			border-collapse: collapse;
 			padding: 15px
 		}
+		h1{display: inline-block;
+		
+			border-radius: 15px;
+			border: none;
+			background-color:#78d95d; 
+			padding: 10px;
+			margin: 10px;	
+			margin-left: 20%;
+			}
+		.btn{margin: 10px;
+			font-size: 30px;
+			margin-bottom: 16px;
+		}
 	</style>
+
 </head>
 <body>
-	<h1> Les données journalieres </h1>
+	<a href="{% url 'cloture' %}"><button class="btn btn-primary">Retour</button></a> <h1> Les données journalieres </h1>
 	<table class="table table-hover">
 		<tr>
 			<th>Creation Date</th>

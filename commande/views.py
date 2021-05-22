@@ -7,8 +7,8 @@ from django.contrib import messages
 # Create your views here.
 @login_required(login_url='login')
 def commandeAdd(request): # function to display medocs and articles
-	all_cmd = Cmd.objects.all()
-	all_cmd_art = CmdArt.objects.all()
+	all_cmd = Cmd.objects.all().order_by('name')
+	all_cmd_art = CmdArt.objects.all().order_by('nameart')
 	
 	
 	context = {

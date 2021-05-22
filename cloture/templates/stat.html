@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Statistiques</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+	<style>
+		label{
+			font-size: 18px;
+
+		}
+		#gcontainer{
+			display: flex;
+			border-radius: 10px;
+			border: solid black 2px;
+			margin: 10px;
+		}
+		table, th, td{
+			border:1px solid black;
+			border-collapse: collapse;
+			padding: 7px
+			margin:auto;
+			font-size: 15px
+		}
+		#stat_container{
+			width: 50%;
+			margin: 10px
+
+		}
+		#container2{
+			width: 50%;
+			border-radius: 10px;
+			border: solid black 2px;
+			margin: 10px;
+			padding: 20px;
+			height: 190px;
+			margin-top: 16px;
+			padding-top:50px;
+			background-color: #f57e42;
+		}
+
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-light bg-light">
+  		<div id="navdiv">
+  			<a href="{% url 'home' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Page D'Acceuil</button></a>
+		    
+		    <a href="{% url 'visedit' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Editer les données Journalieres</button></a>
+		      <a href="{% url 'convention'%}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Bordereaux</button></a>
+			
+		    <a href="{% url 'logout' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Logout</button></a>
+		   
+		    
+ 		</div>
+	</nav>
+	<div id="gcontainer">
+		<div id="stat_container">
+			<form method="POST" action="">{% csrf_token %}
+					<label for="depart"> A Partir de :</label>
+					<input type="date" name="depart" id="depart">
+					<label for="fin"> Jusqu'a :</label>
+					<input type="date" name="fin" id="fin">
+					<input type="submit" name="get" value="Valider" class="btn btn-primary">
+			</form>	
+		
+			
+			<table class="table table-hover ">
+				<tr>
+					<th></th>
+					<th> Bordereaux</th>
+					<th> Jornaux </th>
+					<th>Retour Non Traiter</th>
+				</tr>
+
+				<tr>
+					<th>CNAS</th>
+					<th> {{cnasb}}</th>
+					<th> {{cnasj}} </th>
+					<th> {{cnase}} </th>
+				</tr>
+
+				<tr>
+					<th>CASNOS</th>
+					<th> {{casnosb}}</th>
+					<th> {{casnosj}} </th>
+					<th> {{casnose}} </th>
+				</tr>
+
+				<tr>
+					<th>Caisse Militaire</th>
+					<th>{{cmb}} </th>
+					<th> {{cmj}} </th>
+					<th> {{cme}} </th>
+				</tr>
+			</table>
+		</div>
+		<div id="container2">
+			<label> La Somme des Bordereaux de la CNAS : </label>
+			<label style="font-weight: bold;"> {{cnast}} DA</label>
+			<br>
+			<label> La Somme des Bordereaux de la CASNOS : </label>
+			<label style="font-weight: bold;"> {{casnost}} DA</label>
+			<br>
+			<label> La Somme des Bordereaux de la Caisse Militaire : </label>
+			<label style="font-weight: bold;"> {{cm}} DA</label>
+			<br>
+			<label> Total est :  </label>
+			<label style="font-weight: bold;"> {{mtbrd}} DA</label>
+			<br>
+			<label> La Somme de Retour non Traité est :  </label>
+			<label style="font-weight: bold;"> {{ecartt}} DA</label>
+
+	
+		</div>
+
+
+</div>
+
+
+
+</body>
+</html>
