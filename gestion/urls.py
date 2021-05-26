@@ -25,5 +25,6 @@ urlpatterns = [
     path('', include('gestion_accueil.urls')),
     path('commande/', include('commande.urls')),
     path('cloture/', include('cloture.urls')),
+    path('lab/', include('labo.urls')),
 
 ]

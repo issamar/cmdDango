@@ -1,0 +1,32 @@
+{% extends 'editlab.html '%}
+
+
+
+
+{% block content %}
+	<table class="table table-hover ">
+		<tr>
+			<th>La date</th>
+			<th> Nom Du Patient</th>
+			<th>Date de Naissance</th>
+			<th id="p">Parametres realisés</th>
+			<th>Prix</th>
+			<th>Versement</th>
+			<th>Le Reste</th>
+			<th id="i">Information Supplementaire</th>
+		</tr>
+		{% for data in getsdata %}
+		<tr>
+			<td id="dt">{{data.dt}}</td>
+			<td style="text-transform: uppercase;font-size: 15px">{{data.p_name}}</td>
+			<td>{{data.dob}}</td>
+			<td>{{data.params}}</td>
+			<td>{{data.price}}</td>
+			<td><a href="{% url 'editprev' data.id %}"> {{data.pay}}</a></td>
+			<td>{{data.rest}}</td>
+			<td>{{data.info}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+{% endblock %}
