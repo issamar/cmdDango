@@ -18,7 +18,7 @@ def calcLab(request):
 
 @login_required(login_url='login')
 def vislab(request):
-	get_data = Labo.objects.all().order_by('-dt')[:25]
+	getdata = Labo.objects.all().order_by('-dt')[:25]
 	if request.method== 'POST':
 		req = request.POST
 		dep = req['sdate']
@@ -27,7 +27,7 @@ def vislab(request):
 		get_sdata = Labo.objects.filter(dt__lte = fin).filter(dt__gte=dep)
 		return render(request, 'filterlab.html', {'getsdata' : get_sdata})
 	context = {
-		'getdata' : get_data
+		'getdata' : getdata
 	}
 	return render(request,'editlab.html',context)
 
