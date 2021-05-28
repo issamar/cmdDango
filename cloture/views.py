@@ -275,7 +275,7 @@ def stat(request):
 		casnos_t = round(get_casnos['sumcasnos'],2)
 		get_cm = Bordereaux.objects.filter(pay_ctr = "Caisse Militaire").aggregate(sumcm = Sum('m_brd'))
 		if get_cm['sumcm'] != None :
-		cm_t = round(get_cm['sumcm'],2)
+			cm_t = round(get_cm['sumcm'],2)
 		else :
 			cm_t = 0
 		get_ecart = Bordereaux.objects.aggregate(sumecart=Sum('defr'))
