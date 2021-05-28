@@ -51,13 +51,13 @@ class ClosureForm(forms.ModelForm):
 		}
 
 		labels = {
-			'username' : ("Nom d'utilisateur"),
-			'start_money' : ("L'Argent de Demarrage"),
-			'closure_money' : ("L'Argent de Cloture"),
-			'closure_paper' : ("Biais de Cloture"),
-			'money' : ("Reglage d'Ecart"),
-			'details' : ("Details Sur L'Ecart"),
-			'wasfa' : ("Montant Sur Logiciel"),
+			'username' : ("Username"),
+			'start_money' : ("Start Money"),
+			'closure_money' : ("Closing Money"),
+			'closure_paper' : ("Closing Paper"),
+			'money' : ("Known Gap"),
+			'details' : ("Gap Details"),
+			'wasfa' : ("The Amount From The Managment App"),
 
 		}
 
@@ -125,12 +125,12 @@ class BordereauxForm(forms.ModelForm):
 				}),
 		}
 		labels = {
-			'pay_ctr' : ("Centre de Payement"),
-			'n_brd' : ("Numero de Bordereau"),
-			'dt_clo' : ("Date de Cloture du Bordereau"),
-			'n_ord' : ("Nombre d'Ordenance du Bordereau"),
-			'm_brd' : ("Montant du Bordereau"),
-			'dt_depot' : ("date de Depot Du Bordereau"),
+			'pay_ctr' : ("Payement center"),
+			'n_brd' : ("Slip Number : "),
+			'dt_clo' : (" Slip Closing Date"),
+			'n_ord' : ("Prescription Number (Slip)"),
+			'm_brd' : ("Slip Amount"),
+			'dt_depot' : ("Diposit Date(Slip)"),
 			# 'dt_jrl' : ("Date du Journal"),
 			# 'n_ord_jrl' : ("Nombre d'Ordenance du Journal"),
 			# 'm_jrl' : ("Montant du Journal")
@@ -193,16 +193,16 @@ class EditBrdFrom(forms.ModelForm):
 				})
 			}
 		labels = {
-			'pay_ctr' : ("Centre de Payement"),
-			'n_brd' : ("Numero de Bordereau"),
-			'dt_clo' : ("Date de Cloture du Bordereau"),
-			'n_ord' : ("Nombre d'Ordenance du Bordereau"),
-			'm_brd' : ("Montant du Bordereau"),
-			'dt_depot' : ("date de Depot Du Bordereau"),
-			'dt_jrl' : ("Date du Journal"),
-			'n_ord_jrl' : ("Nombre d'Ordenance du Journal"),
-			'm_jrl' : ("Montant du Journal"),
-			'payement': ('Payé?...')
+			'pay_ctr' : ("Payement center"),
+			'n_brd' : ("Slip Number : "),
+			'dt_clo' : (" Slip Closing Date"),
+			'n_ord' : ("Prescription Number (Slip)"),
+			'm_brd' : ("Slip Amount"),
+			'dt_depot' : ("Diposit Date(Slip)"),
+			'dt_jrl' : ("Sheet Date"),
+			'n_ord_jrl' : ("Prescription Number(Sheet)"),
+			'm_jrl' : ("Sheet Amount"),
+			'payement': ('Payed?...')
 
 
 		}

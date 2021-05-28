@@ -8,15 +8,15 @@ class LaboForm(forms.ModelForm):
 		fields = '__all__'
 
 		labels = {
-			'dt' : ('Date de Prelevement '),
-			'p_name' : ('Nom et Prenom '),
-			'dob' : ('Date de Naissance '),
-			'params' : ('Les parametre faits'),
+			'dt' : ('Blood Sample Date '),
+			'p_name' : ('Patiente Name '),
+			'dob' : ('Date Of Birth '),
+			'params' : ('The Achieved Analysis'),
 			'lab_price' : (''),
-			'price' : ('Total '),
-			'pay' : ('Versement'),
-			'rest' : ('Le Reste '),
-			'info' : ('Information Supplementaire ')
+			'price' : ('Price '),
+			'pay' : ('Payement'),
+			'rest' : ('The Rest '),
+			'info' : ('Additionnal Informations ')
 		}
 		widgets = {
 			'dt' : forms.DateInput(attrs = {

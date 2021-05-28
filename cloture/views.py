@@ -42,6 +42,7 @@ def visulizeToEdit(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def editAdForm(request, pk):
 	row = Closure.objects.get(id=pk)
 	form = ClosureForm(instance=row)
@@ -49,8 +50,6 @@ def editAdForm(request, pk):
 		form  = ClosureForm(request.POST, instance=row)
 		
 		if form.is_valid():
-			print(form.cleaned_data)
-			sys.stdout.flush()
 			#get data one by one from the form before saving it
 			cleaned_form = form.cleaned_data
 			wasfa_amount = cleaned_form['wasfa']
@@ -85,12 +84,16 @@ def userEdition(request, pk):
 	if request.method == 'POST':
 		
 		form  = PartielClosureForm(request.POST, instance=idid)
-		print(request.POST)
-		sys.stdout.flush()
 		if form.is_valid():
 			washed_form = form.cleaned_data
+			ecart_money = washed_form['money']
+			r_money = Closure.objects.get(id=pk).real_money
+			w_money = Closure.objects.get(id=pk).wasfa
+			ecart_calc = (r_money - w_money ) - ecart_money
+			idid.ecart = ecart_calc 
 			form.save()
-			return redirect('/cloture/visualiser/')
+			idid.save()
+		return redirect('/cloture/visualiser/')
 
 	context = {
 		'form' : form
@@ -166,7 +169,8 @@ def editBrd(request, pk):
 	return render(request, 'editbrd.html', context)
 
 
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def addBrdView(request):
 	form = BordereauxForm(request.POST or None)
 	if request.method == 'POST':
@@ -181,7 +185,8 @@ def addBrdView(request):
 	}
 	return HttpResponseRedirect('/cloture/sbrd')
 
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def stat(request):
 	m_t_brd = Bordereaux.objects.aggregate(somme = Sum('m_brd'))
 	mtbrd = round(m_t_brd['somme'],2)
@@ -211,41 +216,68 @@ def stat(request):
 		pre_casnos = Bordereaux.objects.filter(dt_clo__lte = fin).filter(dt_clo__gte=dep).filter(pay_ctr='CASNOS').aggregate(sumbrd=Sum('m_brd'))
 		pre_c_m = Bordereaux.objects.filter(dt_clo__lte = fin).filter(dt_clo__gte=dep).filter(pay_ctr='Caisse Militaire').aggregate(sumbrd=Sum('m_brd'))
 		#get the sum of jrl
-		pre_cnas_jrl = Bordereaux.objects.filter(dt_clo__lte = fin).filter(dt_clo__gte=dep).filter(pay_ctr='CNAS').aggregate(sumbrd=Sum('m_jrl'))
-		pre_casnos_jrl = Bordereaux.objects.filter(dt_clo__lte = fin).filter(dt_clo__gte=dep).filter(pay_ctr='CASNOS').aggregate(sumbrd=Sum('m_jrl'))
-		pre_c_m_jrl = Bordereaux.objects.filter(dt_clo__lte = fin).filter(dt_clo__gte=dep).filter(pay_ctr='Caisse Militaire').aggregate(sumbrd=Sum('m_jrl'))
+		pre_cnas_jrl = Bordereaux.objects.filter(dt_jrl__lte = fin).filter(dt_jrl__gte=dep).filter(pay_ctr='CNAS').aggregate(sumbrd=Sum('m_jrl'))
+
+		pre_casnos_jrl = Bordereaux.objects.filter(dt_jrl__lte = fin).filter(dt_jrl__gte=dep).filter(pay_ctr='CASNOS').aggregate(sumbrd=Sum('m_jrl'))
+		pre_c_m_jrl = Bordereaux.objects.filter(dt_jrl__lte = fin).filter(dt_jrl__gte=dep).filter(pay_ctr='Caisse Militaire').aggregate(sumbrd=Sum('m_jrl'))
 		# get the sum of loss
 		pre_cnas_e = Bordereaux.objects.filter(dt_clo__lte = fin).filter(dt_clo__gte=dep).filter(pay_ctr='CNAS').aggregate(sumbrd=Sum('defr'))
 		pre_casnos_e = Bordereaux.objects.filter(dt_clo__lte = fin).filter(dt_clo__gte=dep).filter(pay_ctr='CASNOS').aggregate(sumbrd=Sum('defr'))
 		
 		pre_c_m_e = Bordereaux.objects.filter(dt_clo__lte = fin).filter(dt_clo__gte=dep).filter(pay_ctr='Caisse Militaire').aggregate(sumbrd=Sum('defr'))
-		try:
+		#try:
+		if pre_cnas['sumbrd'] != None :
 			cnas_b = round(pre_cnas['sumbrd'],2)
-			print(cnas_b)
-			sys.stdout.flush()
+			
+		else:
+			cnas_b = 0
+		if pre_casnos['sumbrd'] != None:
 			casnos_b = round(pre_casnos['sumbrd'],2)
+		else:
+			casnos_b = 0
+		if pre_c_m['sumbrd']!= None:
 			c_m_b = round(pre_c_m['sumbrd'],2)
-			cnas_jrl = round(pre_cnas_jrl['sumbrd'],2)
+		else : 
+			c_m_b = 0
+		if pre_cnas_jrl['sumbrd'] != None:
+			cnas_jrl = round(pre_cnas_jrl['sumbrd'])
+		else:
+			cnas_jrl = 0
+		if pre_casnos_jrl['sumbrd'] != None:
 			casnos_jrl = round(pre_casnos_jrl['sumbrd'],2)
+		else:
+			casnos_jrl = 0
+		if pre_c_m_jrl['sumbrd']!= None:
 			c_m_jrl = round(pre_c_m_jrl['sumbrd'],2)
+		else :
+			c_m_jrl = 0
+		if pre_cnas_e['sumbrd'] != None:
 			cnas_e = round(pre_cnas_e['sumbrd'],2)
+		else:
+			cnas_e = 0
+		if pre_casnos_e['sumbrd'] != None:
 			casnos_e = round(pre_casnos_e['sumbrd'],2)
+		else:
+			casnos_e = 0
+		if pre_c_m_e['sumbrd'] != None:
 			c_m_e = round(pre_c_m_e['sumbrd'],2)
-			m_t_brd = Bordereaux.objects.aggregate(somme = Sum('m_brd'))
-			mtbrd = round(m_t_brd['somme'],2)
-			get_cnas = Bordereaux.objects.filter(pay_ctr = "CNAS").aggregate(sumcnas = Sum('m_brd'))
-			cnas_t = round(get_cnas['sumcnas'],2)
-			get_casnos = Bordereaux.objects.filter(pay_ctr = "CASNOS").aggregate(sumcasnos = Sum('m_brd'))
-			casnos_t = round(get_casnos['sumcasnos'],2)
-			get_cm = Bordereaux.objects.filter(pay_ctr = "Caisse Militaire").aggregate(sumcm = Sum('m_brd'))
-			cm_t = round(get_cm['sumcm'],2)
-			get_ecart = Bordereaux.objects.aggregate(sumecart=Sum('defr'))
-			ecart_t = round(get_ecart['sumecart'],2)
+		else : 
+			c_m_e = 0
+		m_t_brd = Bordereaux.objects.aggregate(somme = Sum('m_brd'))
+		mtbrd = round(m_t_brd['somme'],2)
+		get_cnas = Bordereaux.objects.filter(pay_ctr = "CNAS").aggregate(sumcnas = Sum('m_brd'))
+		cnas_t = round(get_cnas['sumcnas'],2)
+		get_casnos = Bordereaux.objects.filter(pay_ctr = "CASNOS").aggregate(sumcasnos = Sum('m_brd'))
+		casnos_t = round(get_casnos['sumcasnos'],2)
+		get_cm = Bordereaux.objects.filter(pay_ctr = "Caisse Militaire").aggregate(sumcm = Sum('m_brd'))
+		cm_t = round(get_cm['sumcm'],2)
+		get_ecart = Bordereaux.objects.aggregate(sumecart=Sum('defr'))
+		ecart_t = round(get_ecart['sumecart'],2)
 		
-		except TypeError:
-			print('worked')
-		except UnboundLocalError :
-			print('worked again')
+		# except TypeError:
+		# 	print('worked')
+		# except UnboundLocalError :
+		# 	print('worked again')
 
 		
 		
@@ -271,7 +303,7 @@ def stat(request):
 		
 		return render(request,'stat.html', {
 				'cnasb' : cnas_b, 'casnosb' : casnos_b, 'cmb' : c_m_b, 'cnasj' : cnas_jrl, 'casnosj' : casnos_jrl,
-				'cmj': c_m_jrl, 'cnase': cnas_e, 'casnose' : casnos_e, 'cme' : c_m_e,'mtbrd' : mtbrd, 'cnast' : cnas_t,
+				'cmj' : c_m_jrl, 'cnase' : cnas_e, 'casnose' : casnos_e,'cme' : c_m_e,'mtbrd' : mtbrd, 'cnast' : cnas_t,
 		'casnost': casnos_t, 'cm' : cm_t, 'ecartt' : ecart_t
 				})
 	context = {

@@ -10,7 +10,7 @@ class Closure(models.Model):
 	money = models.DecimalField(decimal_places=2, max_digits=8, null=True, blank=True, default=0)
 	details = models.CharField(max_length=200, blank=True, null=True)
 	wasfa = models.DecimalField(decimal_places=2, max_digits=8, blank=True, null=True, default=0)
-	real_money = models.DecimalField(decimal_places=2, max_digits=8, null=True, blank=True)
+	real_money = models.DecimalField(decimal_places=2, max_digits=8, null=True, blank=True, default=0)
 	ecart = models.DecimalField(decimal_places=2, max_digits=8, null=True, blank=True)
 
 

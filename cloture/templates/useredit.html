@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Editer l'ecart</title>
+	<title>Edit The Gap</title>
 	<style>
 		label{
 			display: none;
@@ -29,7 +29,7 @@
 			background-color: green;
 			padding: 10px;
 			outline: none;
-			margin-left: 80px
+			margin-left: 5%
 
 		}
 		#send:hover{
@@ -44,7 +44,7 @@
 			border:solid black 5px;
 			width: 45%;
 			border-radius: 15px;
-			margin: 10px;
+			margin: auto;
 			
 		}
 		#subcontainer2{
@@ -82,11 +82,12 @@
 <body>
 <div id="container">
 	<div id="subcontainer1">
-		<h1> Editer l'ecart</h1>
+		<h1> Edit the Gap</h1>
+
 		<form method="POST" action="">{% csrf_token %}
 			<p>{{form.money}}</p>
 			<p>{{form.details}}</p>
-			<input type="submit" name="edit " value="Editer" id="send">
+			<input type="submit" name="edit " value="Confirm Edition" id="send">
 		</form>
 	</div>
 </div>

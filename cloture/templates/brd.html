@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Suivi des Bordereaux</title>
+	<title>Conventions Managment</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 	<style >
 
@@ -73,10 +73,10 @@
 <body>
 	<nav class="navbar navbar-light bg-light">
   		<div id="navdiv">
-  			<a href="{% url 'home' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Page D'Acceuil</button></a>
+  			<a href="{% url 'home' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Home Page</button></a>
 		    
-		    <a href="{% url 'visedit' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Editer les données</button></a>
-		      <a href="{% url 'stat'%}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Statistiques</button></a>
+		    <a href="{% url 'visedit' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Edit Daily Data</button></a>
+		      <a href="{% url 'stat'%}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Conventions Statistic</button></a>
 			
 		    <a href="{% url 'logout' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Logout</button></a>
 		   
@@ -86,7 +86,7 @@
 	<div id="container">
 		<div id="aj_container">
 
-			<h2> Ajouter un Bordereau </h2>
+			<h2> Add a Convention Info </h2>
 			<form method="POST" action="add/">{% csrf_token %}
 				
 				{{form}}
@@ -106,19 +106,19 @@
 	<div id="disp_container">
 		<table class="table table-hover ">
 			<tr>
-				<th>Centre</th>
-				<th>N° de brd</th>
-				<th>Date de Cloture</th>
-				<th>N° ORD</th>
-				<th>Montant de brd</th>
-				<th>Date de Depot</th>
-				<th>Date de Journal</th>
-				<th>N° ORD Jrl</th>
-				<th>Montand Jrl</th>
-				<th>Date de Payement</th>
-				<th> Ecart</th>
-				<th>E.Ord</th>
-				<th>Payement</th>
+				<th>center</th>
+				<th>Slip N°</th>
+				<th>Closing Date</th>
+				<th>N° presq</th>
+				<th>Slips Amount</th>
+				<th>Diposit Day</th>
+				<th>Sheet Date</th>
+				<th>Pres Sheet N°</th>
+				<th>Sheet Amount</th>
+				<th>Payment Day</th>
+				<th> Gap</th>
+				<th>Pres Gap</th>
+				<th>Pay Stat</th>
 			</tr>
 			
 
@@ -137,7 +137,7 @@
 				<td> {{brd.dt_pay}} </td>
 				<td> {{brd.defr}} </td>
 				<td>{{brd.def_o}}</td>
-				<td>  {% if brd.payement == True %} Payé {%else%} NonPayé {% endif %}</td>
+				<td>  {% if brd.payement == True %} Payed {%else%} Not Payed {% endif %}</td>
 			</tr>
 
 		{% endfor %}

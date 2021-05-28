@@ -4,8 +4,10 @@ import sys
 from .forms import LaboForm
 from . models import Labo
 from django.db.models import Sum
+from django.contrib.auth.decorators import login_required
+from gestion_accueil.decorators import unauthenticated_user, allowed_users
 # Create your views here.
-
+@login_required(login_url='login')
 def calcLab(request):
 	form = LaboForm(request.POST or None)
 	if request.method == 'POST':
@@ -14,9 +16,9 @@ def calcLab(request):
 			form = LaboForm()
 	return render(request, 'calcLab.html', {'form' : form})
 
-
+@login_required(login_url='login')
 def vislab(request):
-	get_data = Labo.objects.all().order_by('-dt')
+	get_data = Labo.objects.all().order_by('-dt')[:25]
 	if request.method== 'POST':
 		req = request.POST
 		dep = req['sdate']
@@ -31,7 +33,7 @@ def vislab(request):
 
 
 
-
+@login_required(login_url='login')
 def editPrev(request, pk):
 	get_row = Labo.objects.get(id = pk)
 	form = LaboForm(instance= get_row )
@@ -46,6 +48,9 @@ def editPrev(request, pk):
 	}
 	return render(request, 'editverlab.html', context)
 
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def labStat(request):
 	if request.method== 'POST':
 		req = request.POST

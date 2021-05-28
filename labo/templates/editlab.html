@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Lab Visualisation </title>
+	<title>View Lab Realased Analysis </title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 	<style>
 		table, th, td{
@@ -36,44 +36,46 @@
 		#vdate{
 			margin-left:5%;
 		}
-		
+		.lbl{font-weight: bold;}
 	</style>
 </head>
 <body>
 	<nav class="navbar navbar-light bg-light">
         <div id="navdiv">
-            <a href="{% url 'home' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Page D'Acceuil</button></a>
+            <a href="{% url 'home' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Home Page</button></a>
             <a href="{% url 'calclab' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Previous Page</button></a>
             
-            <a href="{% url 'visedit' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Editer les données Journalier</button></a>
-            <a href="{% url 'convention' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Suivi des bordereaux</button></button></a>
+            <a href="{% url 'visedit' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Edit daily Data</button></a>
+            <a href="{% url 'convention' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Convention Managment</button></button></a>
 
             <a href="{% url 'logout' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Logout</button></a>
            
             
         </div>
     </nav>
-<h1> Laboratoire </h1>
+<h1> Laboratory </h1>
 <div id="ddiv">
 	<form method="POST" action="">{% csrf_token %}
-	<label> Choisir la date de prelevement de : </label>
+	<label> Choose The sample blood date from : </label>
 	<input type="date" name="sdate"  id="sdate">
-	<label> Jusqu'a : </label>
+	<label> until : </label>
 	<input type="date" name="ldate"  id="ldate">
-	<input type="submit" name="valid" value="Valider" class="btn btn-primary" id="vdate">	
+	<input type="submit" name="valid" value="Get Data" class="btn btn-primary" id="vdate">	
 	</form>
 </div>
 {% block content %}
+<label class="lbl">N.B: To edit a profile click on payement </label> <br>
+<label class="lbl"> To search for specifique patient choose the date of sample blood then use in keyboard  "ctrl + f" to search for a name </label>
 <table class="table table-hover ">
 	<tr>
-		<th>La date</th>
-		<th> Nom Du Patient</th>
-		<th>Date de Naissance</th>
-		<th id="p">Parametres realisés</th>
-		<th>Prix</th>
-		<th>Versement</th>
-		<th>Le Reste</th>
-		<th id="i">Information Supplementaire</th>
+		<th>Date</th>
+		<th> Patiente Name</th>
+		<th>Date Of Birth</th>
+		<th id="p">the Acheived Analysis</th>
+		<th>Price</th>
+		<th>Payement</th>
+		<th>The Rest</th>
+		<th id="i">Additional Informations</th>
 	</tr>
 	{% for data in getdata %}
 	<tr>

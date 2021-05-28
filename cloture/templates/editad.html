@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Editer la Cloture</title>
+	<title>Edit Closing Data</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 	<style>
 		
@@ -85,12 +85,12 @@
 <body>
 <div id="container">
 	<div id="subcontainer1">
-		<h1> Editer la Cloture</h1>
+		<h1> Closing Day Edition</h1>
 		<form method="POST" action="">{% csrf_token %}
 			{{form.as_p}}
 			<div  class="container" id="subbtn">
-				<input type="submit" name="edit " value="Editer" id="send" class="btn btn-danger">
-				<button class="btn btn-success" id="btncancel"><a href="{% url 'visedit' %}">Annuler</a></button>
+				<input type="submit" name="edit " value="Edit" id="send" class="btn btn-danger">
+				<button class="btn btn-success" id="btncancel"><a href="{% url 'visedit' %}">Cancel</a></button>
 			</div>
 		</form>
 	</div>

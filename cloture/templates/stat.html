@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Statistiques</title>
+	<title>Statistics</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 	<style>
 		label{
@@ -43,10 +43,10 @@
 <body>
 	<nav class="navbar navbar-light bg-light">
   		<div id="navdiv">
-  			<a href="{% url 'home' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Page D'Acceuil</button></a>
+  			<a href="{% url 'home' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Home Page</button></a>
 		    
-		    <a href="{% url 'visedit' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Editer les données Journalieres</button></a>
-		      <a href="{% url 'convention'%}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Bordereaux</button></a>
+		    <a href="{% url 'visedit' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Edit Daily Data</button></a>
+		      <a href="{% url 'convention'%}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Conventions Managment</button></a>
 			
 		    <a href="{% url 'logout' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Logout</button></a>
 		   
@@ -56,9 +56,9 @@
 	<div id="gcontainer">
 		<div id="stat_container">
 			<form method="POST" action="">{% csrf_token %}
-					<label for="depart"> A Partir de :</label>
+					<label for="depart"> from :</label>
 					<input type="date" name="depart" id="depart">
-					<label for="fin"> Jusqu'a :</label>
+					<label for="fin"> Until :</label>
 					<input type="date" name="fin" id="fin">
 					<input type="submit" name="get" value="Valider" class="btn btn-primary">
 			</form>	
@@ -67,9 +67,9 @@
 			<table class="table table-hover ">
 				<tr>
 					<th></th>
-					<th> Bordereaux</th>
-					<th> Jornaux </th>
-					<th>Retour Non Traiter</th>
+					<th> Slips</th>
+					<th> Sheets </th>
+					<th>Return Not Processed</th>
 				</tr>
 
 				<tr>
@@ -87,7 +87,7 @@
 				</tr>
 
 				<tr>
-					<th>Caisse Militaire</th>
+					<th>Military Convention</th>
 					<th>{{cmb}} </th>
 					<th> {{cmj}} </th>
 					<th> {{cme}} </th>
@@ -95,19 +95,19 @@
 			</table>
 		</div>
 		<div id="container2">
-			<label> La Somme des Bordereaux de la CNAS : </label>
+			<label> The Amount Of CNAS Convention : </label>
 			<label style="font-weight: bold;"> {{cnast}} DA</label>
 			<br>
-			<label> La Somme des Bordereaux de la CASNOS : </label>
+			<label> The Amount Of CASNOS Convention : </label>
 			<label style="font-weight: bold;"> {{casnost}} DA</label>
 			<br>
-			<label> La Somme des Bordereaux de la Caisse Militaire : </label>
+			<label> The Amount Of Military Convention: </label>
 			<label style="font-weight: bold;"> {{cm}} DA</label>
 			<br>
-			<label> Total est :  </label>
+			<label> Total is :  </label>
 			<label style="font-weight: bold;"> {{mtbrd}} DA</label>
 			<br>
-			<label> La Somme de Retour non Traité est :  </label>
+			<label> The Amount Of return Not Processed :  </label>
 			<label style="font-weight: bold;"> {{ecartt}} DA</label>
 
 	

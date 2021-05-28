@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Cloture</title>
+	<title>Closing Work</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 	<style>
 		label{font-weight: bold;}
@@ -30,21 +30,21 @@
 <body>
 	<nav class="navbar navbar-light bg-light">
   		<div id="navdiv">
-  			<a href="{% url 'home' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Page D'Acceuil</button></a>
+  			<a href="{% url 'home' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Home Page</button></a>
 		    
-		    <a href="{% url 'visedit' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Editer les données</button></a>
-			<a href="{% url 'visualiser' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Visualiser l'ecart</button></a>
-			<a href="{% url 'convention' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Suivi des bordereaux</button></button></a>
+		    <a href="{% url 'visedit' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Edit Data</button></a>
+			<a href="{% url 'visualiser' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">View Gap</button></a>
+			<a href="{% url 'convention' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Conventions Managment</button></button></a>
 		    <a href="{% url 'logout' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Logout</button></a>
 		   
 		    
  		</div>
 </nav>
 	<div id="subcontainer1" class="container-sm p-3 mt-3"> 
-		<h1> Cloturer la journée</h1>
+		<h1> Close Working Day</h1>
 		<form method="POST" action="">{% csrf_token %}
 			{{form.as_p}}
-			<input type="submit" name="valider" value="Envoyer" id="send" class="btn btn-outline-success">
+			<input type="submit" name="valider" value="Send" id="send" class="btn btn-outline-success">
 		</form>
 	</div>
 </div>

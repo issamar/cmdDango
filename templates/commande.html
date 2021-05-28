@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Passe Une Commande</title>
+	<title>Make an Order</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 	<style>
 		#msg{
@@ -34,17 +34,17 @@
 <body >
 	<nav class="navbar navbar-light bg-light">
   		<div id="navdiv">
-  			<a href="{% url 'home' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Page D'Acceuil</button></a>
+  			<a href="{% url 'home' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Home Page</button></a>
 		    
-		    <a href="{% url 'visedit' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Editer les données</button></a>
-			<a href="{% url 'visualiser' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Visualiser l'ecart</button></a>
-			<a href="{% url 'convention' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Suivi des bordereaux</button></button></a>
+		    <a href="{% url 'visedit' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Edit Data</button></a>
+			<a href="{% url 'visualiser' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">View Gap</button></a>
+			<a href="{% url 'convention' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Conventions Managment</button></button></a>
 		    <a href="{% url 'logout' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Logout</button></a>
 		   
 		    
  		</div>
 </nav>
-	<h1 style="text-align: center; border: solid black 3px; border-radius: 10px; background-color: #8df542; margin: 10px;"> Mes Manquants</h1>
+	<h1 style="text-align: center; border: solid black 3px; border-radius: 10px; background-color: #8df542; margin: 10px;"> My Orders</h1>
 	{% if messages %}
 		{% for message in messages %}
 			<h3 id="msg">{{message}}</h3>
@@ -54,7 +54,7 @@
 	<div style="display: flex;flex-wrap: wrap;">
 		
 	<div style="border: solid 2px green; width: 45%; padding-left: 10px; margin: 20px; border-radius: 10px;">
-	<h3 style="font-size: 30px; text-align: center;">Commande des Médicaments</h3>
+	<h3 style="font-size: 30px; text-align: center;">Drugs Order</h3>
 	
 		
 	<form action="add/" method="POST">{% csrf_token %}
@@ -98,7 +98,7 @@
 	</div>
 <!--------------------------------------------------------------------------------------------------------->
 	<div style="border: solid 2px red; width: 45%; padding-left: 10px; margin: 20px; border-radius: 10px">
-		<h3 style="margin-top: 10px; font-size:27px;text-align: center;">Commande des Produits Paramedicaux et Cosmetiques</h3>
+		<h3 style="margin-top: 10px; font-size:27px;text-align: center;">Order of Paramedical and Cosmetic Products</h3>
 		
 		<form action="addArt/" method="POST">{% csrf_token %}
 		<input type="text" name="nameart" required style="border-radius: 10px; font-size: 24px;outline: none;">
