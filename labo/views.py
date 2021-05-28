@@ -14,7 +14,7 @@ def calcLab(request):
 		if form.is_valid():
 			form.save()
 			form = LaboForm()
-	return render(request, 'calcLab.html', {'form' : form})
+	return render(request, 'calclab.html', {'form' : form})
 
 @login_required(login_url='login')
 def vislab(request):
