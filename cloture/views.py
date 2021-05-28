@@ -188,6 +188,7 @@ def addBrdView(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
 def stat(request):
+
 	m_t_brd = Bordereaux.objects.aggregate(somme = Sum('m_brd'))
 	mtbrd = round(m_t_brd['somme'],2)
 	get_cnas = Bordereaux.objects.filter(pay_ctr = "CNAS").aggregate(sumcnas = Sum('m_brd'))
@@ -195,7 +196,10 @@ def stat(request):
 	get_casnos = Bordereaux.objects.filter(pay_ctr = "CASNOS").aggregate(sumcasnos = Sum('m_brd'))
 	casnos_t = round(get_casnos['sumcasnos'],2)
 	get_cm = Bordereaux.objects.filter(pay_ctr = "Caisse Militaire").aggregate(sumcm = Sum('m_brd'))
-	cm_t = round(get_cm['sumcm'],2)
+	if get_cm['sumcm'] != None :
+		cm_t = round(get_cm['sumcm'],2)
+	else :
+		cm_t = 0
 	get_ecart = Bordereaux.objects.aggregate(sumecart=Sum('defr'))
 	ecart_t = round(get_ecart['sumecart'],2)
 	cnas_b = 0
