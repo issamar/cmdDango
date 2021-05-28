@@ -108,7 +108,7 @@ def userEdition(request, pk):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
 def convention(request):
-	all_brd = Bordereaux.objects.all()
+	all_brd = Bordereaux.objects.all().order_by('dt_clo')
 	# form = BordereauxForm(request.POST or None)
 	# if request.method == 'POST':
 	# 	form = BordereauxForm(request.POST)
