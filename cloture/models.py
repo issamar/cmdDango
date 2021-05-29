@@ -22,7 +22,7 @@ class Bordereaux(models.Model):
 	m_brd = models.DecimalField(decimal_places=2, max_digits=8)
 	dt_depot = models.DateField(null=True, blank=True)
 	dt_jrl = models.DateField(null=True, blank=True)
-	n_ord_jrl = models.IntegerField( null=True, blank=True)
+	n_ord_jrl = models.IntegerField( null=True, blank=True, default=0)
 	m_jrl = models.DecimalField(decimal_places=2, max_digits=8, null=True, blank=True, default=0)
 	dt_pay = models.DateField( null=True, blank=True)
 	defr = models.DecimalField(decimal_places=2, max_digits=8, null=True, blank=True, default=0)
