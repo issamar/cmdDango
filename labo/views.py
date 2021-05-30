@@ -37,12 +37,14 @@ def vislab(request):
 def editPrev(request, pk):
 	get_row = Labo.objects.get(id = pk)
 	form = LaboForm(instance= get_row )
-	if request.method == "POST":
+	if request.method == "POST" and 'edit' in request.POST:
 		form  = LaboForm(request.POST, instance=get_row)
 		if form.is_valid():
 			form.save()
 			return redirect('/lab/vislab/')
-		
+	if request.method == "POST" and 'delete' in request.POST:
+		get_row.delete()
+		return redirect('/lab/vislab/')
 	context = {
 		'form' : form
 	}
@@ -61,6 +63,10 @@ def labStat(request):
 		lab_stat_data = pre_lab_stat_data['lab_price__sum']
 		pre_ph_stat_data = Labo.objects.filter(dt__lte = fin).filter(dt__gte=dep).aggregate(Sum('price'))
 		ph_stat_data = pre_ph_stat_data['price__sum']
-		return render(request, 'labstat.html', {'count' : count_stat_data, 'labprice' : lab_stat_data, 'price' : ph_stat_data})
+		pre_ph_paystat_data = Labo.objects.filter(dt__lte = fin).filter(dt__gte=dep).aggregate(Sum('pay'))
+		ph_paystat_data = pre_ph_paystat_data['pay__sum']
+		pre_rest_data = Labo.objects.filter(dt__lte = fin).filter(dt__gte=dep).aggregate(Sum('rest'))
+		rest_data = pre_rest_data['rest__sum']
+		return render(request, 'labstat.html', {'count' : count_stat_data, 'labprice' : lab_stat_data, 'price' : ph_stat_data, 'payement' : ph_paystat_data, 'rest' : rest_data})
 	
 	return render(request, 'labstat.html')

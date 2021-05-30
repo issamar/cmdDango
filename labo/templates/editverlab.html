@@ -42,6 +42,7 @@
 		<form method="POST" action="">{% csrf_token %}
 		{{form.as_p}}
 		<input type="submit" name="edit" value="Edit Validation" id="editbtn" class="btn btn-primary">
+		<input type="submit" name="delete" value="Delete" id="dlt" class="btn btn-danger">
 		<button class="btn btn-danger" id="cancelbtn"><a href="{% url 'vislab'%}">Cancel</a></button>
 	</form>
 	</div>

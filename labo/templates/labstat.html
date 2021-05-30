@@ -48,7 +48,7 @@
 
 
 </head>
-<body>
+<body >
 	<nav class="navbar navbar-light bg-light">
   		<div id="navdiv">
   			<a href="{% url 'home' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Home Page</button></a>
@@ -68,7 +68,7 @@
 			<input type="date" name="startdt" class="dt">
 			<label style="font-weight: bold; margin-left: 5%"> Until :</label>
 			<input type="date" name="endt" class="dt">
-			<input type="submit" name="send" value=" Get Data " class="btn btn-primary" id='btn1'>
+			<input type="submit" name="send" value=" Get Data " class="btn btn-primary" id='btn1' >
 
 		</form>
 	</div>
@@ -79,7 +79,7 @@
 						<th>Count samples </th>
 					</tr>
 					<tr>
-						<td style="text-align: center;"> {{count}} </td>
+						<td id="td1" style="text-align: center;"> {{count}} </td>
 					</tr>
 				</table>
 			</div>
@@ -89,7 +89,7 @@
 						<th>Sum Lab Price </th>
 					</tr>
 					<tr>
-						<td style="text-align: center;"> {{labprice}} </td>
+						<td id="td2" style="text-align: center;"> {{labprice}} </td>
 					</tr>
 				</table>
 			</div>
@@ -99,12 +99,53 @@
 						<th>Sum Pharmacy Price </th>
 					</tr>
 					<tr>
-						<td style="text-align: center;"> {{price}}</td>
+						<td id="td3" style="text-align: center;"> {{price}}</td>
+					</tr>
+				</table>
+			</div>
+			<div id="div4" class="divs">
+				<table>
+					<tr>
+						<th>Payement Status </th>
+					</tr>
+					<tr>
+						<td id="td4" style="text-align: center;"> {{payement}}</td>
+					</tr>
+				</table>
+			</div>
+			<div  class="divs">
+				<table>
+					<tr>
+						<th>Not Payed Yet </th>
+					</tr>
+					<tr>
+						<td id="divhold" style="text-align: center;"> {{rest}}</td>
+					</tr>
+				</table>
+			</div>
+			<div id="div5" class="divs">
+				<table>
+					<tr>
+						<th>Gain </th>
+					</tr>
+					<tr>
+						<td id="td5" style="text-align: center;"></td>
 					</tr>
 				</table>
 			</div>
 
 
 		</div>
+<script>
+document.onload=calc()
+function calc(){
+	var sCount = parseInt(document.getElementById('td1').textContent);
+	var labSum = parseInt(document.getElementById('td2').textContent);
+	var phSum = parseInt(document.getElementById('td3').textContent);
+	var payStat = parseInt(document.getElementById('td4').textContent);
+	var benifit = phSum - ((sCount*100)+labSum);
+	document.getElementById('td5').textContent =  benifit
+};
+</script>
 </body>
 </html>
