@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Cash Statistics </title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+	<style>
+		#h{text-decoration: none;}
+		#stat_container{
+			margin: auto;
+			padding: 5px;
+			background-color: #a1a08c;
+			border-radius: 20px;
+			text-align: center;
+		}
+		#table1{
+			margin: 10px;
+			width: 90%;
+			margin-left: 5%;
+		}
+		h3{
+			text-align: center;
+			margin: 10px;
+			padding: 10px;
+			background-color: #ebac3f;
+			border-radius: 20px;
+
+
+		}
+	</style>
+	<script
+	  src="https://code.jquery.com/jquery-3.4.1.min.js"
+	  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	  crossorigin="anonymous"></script>
+
+	<script text="javascript">
+	    setTimeout(fade_out, 3000);
+	    function fade_out() {
+	        $("#msg").fadeOut().empty();
+	    }
+
+	    	
+	</script>
+</head>
+<body>
+	<h1> Cash Statistics </h1>
+	<div id="stat_container" class="container-fluid " >
+		<form method="POST" action="">{% csrf_token %}
+			<label for="sdate" >Select Data From </label>
+			<input type="date" name="sdate" id="sdate">
+			<label for="edate"> Until : </label>
+			<input type="date" name="edate" id="edate">
+			<select name="usern">
+				<option></option>
+				{% for user in users %}
+					<option>{{user}}</option>
+				{% endfor %}
+			</select>
+			
+			<input type="submit" name="valid" value="Get Data">
+		</form>
+		<table class="table table-hover " id="table1">
+			<tr>
+				<th>Count</th>
+				<th>Sum</th>
+				<th>Average</th>
+				<th>Min</th>
+				<th>Max</th>
+				<th>Gap</th>
+			</tr>
+			<tr>
+				<td>{{count}} </td>
+				<td>{{cash}} </td>
+				<td> {{avg|floatformat:2}}</td>
+				<td>{{mincash}} </td>
+				<td>{{maxcash}} </td>
+				<td>{{gap}} </td>
+			</tr>
+		</table>
+	</div>
+	<div>
+		<table class="table table-hover ">
+		<tr id="tr1">
+			<th>Creation Date</th>
+			<th>Closing Paper</th>
+			<th>Software</th>
+			<th>Cash Box</th>
+			<th>Calc Gap</th>
+		</tr>
+		{% if messages %}
+			{% for message in messages %}
+				<h3 id="msg"> {{message}}</h3>
+			{% endfor %}
+		{% endif %}	
+		{% for data in datas %}
+	
+		<tr id="{{data.id}}">
+			<td> {{data.day}}</td>
+			<td> {{data.closure_paper__sum}} </td>
+			<td> {{data.wasfa__sum|floatformat:2}} </td>
+			<td> {{data.real_money__sum}} </td>
+			<td> {{data.ecart__sum|floatformat:0}}</td>
+
+		</tr>
+
+		{% endfor %}
+		{% for sdate in selectedata %}
+	
+		<tr >
+			<td> {{sdata.day}}</td>
+			<td> {{sdata.closure_paper__sum}} </td>
+			<td> {{sdata.wasfa__sum|floatformat:2}} </td>
+			<td> {{sdata.real_money__sum}} </td>
+			<td> {{sdata.ecart__sum|floatformat:0}}</td>
+
+		</tr>
+
+		{% endfor %}
+	</table>
+
+	</div>
+</body>
+</html>

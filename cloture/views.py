@@ -7,8 +7,12 @@ from django.contrib.auth.decorators import login_required
 from gestion_accueil.decorators import unauthenticated_user, allowed_users
 import datetime
 from django.contrib import messages
-from django.db.models import Sum
+from django.db.models import Sum, Avg, Min, Max, Count
 from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.models import User
+from django.utils import timezone
+from django.utils.timezone import make_aware
+from django.db.models.functions import TruncDay
 # Create your views here.
 @login_required(login_url='login')
 def closure(request):
@@ -24,6 +28,7 @@ def closure(request):
 
 @login_required(login_url='login')
 def showData(request):
+
 	some_data = Closure.objects.all().order_by('-id')[:10]
 	context = {
 		'datas' : some_data
@@ -34,11 +39,89 @@ def showData(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
 def visulizeToEdit(request):
+	
+
 	get_data = Closure.objects.all().order_by('-id')
+	
+		# if usern=="":
+		# 	count = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).count()
+		# 	pre_cash = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).aggregate(total=Sum('closure_paper'))
+		# 	cash = pre_cash['total']
+		# 	pre_cash_avg = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).aggregate(total=Avg('closure_paper'))
+		# 	cash_avg = round(pre_cash_avg['total'])
+		# 	# print(count)
+		# 	# sys.stdout.flush()
+		# 	return render(request,'visedit.html',{'count' : count, 'cash' : cash, 'cashavg' : cash_avg })
+		# if usern!="":
+			
+				
+		# 	print(aware_sdate, aware_edate)
+		# 	sys.stdout.flush()
+		# 	count = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).filter(username__username=usern).count()
+		# 	print(count)
+		# 	sys.stdout.flush()
+
+		# 	return render(request,'visedit.html',{'count' : count })
 	context = {
 		'getdata' : get_data
 	}
 	return render(request,'visedit.html',context)
+
+def cashstat(request):
+	users = User.objects.all()
+	get_data = Closure.objects.values(day=TruncDay('creation_date')).annotate(Sum('closure_paper'), Sum('wasfa'), Sum('real_money'), Sum('ecart'))
+	count = Closure.objects.values(day=TruncDay('creation_date')).annotate(Count('creation_date')).count()
+	pre_get_sum = Closure.objects.all().aggregate(Sum('closure_paper'))
+	get_sum = round(pre_get_sum['closure_paper__sum'],2)
+	calc_avg = get_sum / count
+	get_mincash = Closure.objects.values(day=TruncDay('creation_date')).annotate(Sum('closure_paper')).values_list('closure_paper__sum', flat=True)
+	mincash=min(get_mincash)
+	get_maxcash = Closure.objects.values(day=TruncDay('creation_date')).annotate(Sum('closure_paper')).values_list('closure_paper__sum', flat=True)
+	maxcash=max(get_maxcash)
+	get_all_gap = Closure.objects.all().aggregate(Sum('ecart'))
+	all_gap = round(get_all_gap['ecart__sum'],2)
+	print(get_all_gap)
+	sys.stdout.flush()
+	if request.method == 'POST':
+		data =  request.POST
+		usern= data['usern']
+		aware_sdate= make_aware(datetime.datetime.strptime(data['sdate'], '%Y-%m-%d'))
+		edate = make_aware(datetime.datetime.strptime(data['edate'], '%Y-%m-%d'))
+		aware_edate = edate + datetime.timedelta(days=1)
+
+		#count = Closure.objects.values(day=TruncDay('creation_date')).annotate(Count('creation_date')).count()
+		count = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).values(day=TruncDay('creation_date')).annotate(Count('creation_date')).count()
+		print(count)
+		sys.stdout.flush()
+		if count == 0:
+			messages.error(request,' You have no Data in This Range Of Time ')
+			return render(request,'cashstat.html', {'datas' : get_data,'users' : users})
+		if count != 0:
+			if usern == "":
+				pre_cash = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).aggregate(total=Sum('closure_paper'))
+				cash = pre_cash['total']
+				avg = round((cash / count),2)
+				get_cash = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).values(day=TruncDay('creation_date')).annotate(Sum('closure_paper')).values_list('closure_paper__sum', flat=True)
+				min_cash=min(get_cash)
+				max_cash = max(get_cash)
+				pre_get_gap = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).aggregate(Sum('ecart'))
+				get_gap=round(pre_get_gap['ecart__sum'])
+				get_data = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).values(day=TruncDay('creation_date')).annotate(Sum('closure_paper'), Sum('wasfa'), Sum('real_money'), Sum('ecart'))
+				print(get_data)
+				sys.stdout.flush()
+				return render(request,'cashstat.html',{'count' : count, 'cash' : cash, 'avg': avg, 
+					'mincash' : min_cash,'maxcash':max_cash,'gap':get_gap, 'datas': get_data,
+					'users' : users})
+			if usern != "" :
+
+				return render(request, 'cashstat.html', {'users' : users})
+	return render(request,'cashstat.html', {'datas' : get_data,'users' : users, 'count' :  count,
+				 'cash' : get_sum, 'avg' : calc_avg, 'mincash': mincash, 'maxcash' : maxcash, 'gap' : all_gap})
+
+
+
+
+
 
 
 @login_required(login_url='login')
@@ -214,6 +297,7 @@ def stat(request):
 	if request.method == 'POST':
 		req = request.POST
 		dep = req['depart']
+		# correct fin with adding one day
 		fin = req['fin']
 		# get the sum of each brd
 		pre_cnas = Bordereaux.objects.filter(dt_clo__lte = fin).filter(dt_clo__gte=dep).filter(pay_ctr='CNAS').aggregate(sumbrd=Sum('m_brd'))
@@ -318,3 +402,5 @@ def stat(request):
 		'casnost': casnos_t, 'cm' : cm_t, 'ecartt' : ecart_t
 	}
 	return render(request,'stat.html', context)
+
+

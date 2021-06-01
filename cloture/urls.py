@@ -1,6 +1,5 @@
 from django.urls import path
-from .views import closure, showData, visulizeToEdit, editAdForm, userEdition, convention, editBrd,addBrdView, stat
-
+from .views import closure, showData, visulizeToEdit, editAdForm, userEdition, convention, editBrd,addBrdView, stat, cashstat
 
 
 urlpatterns = [
@@ -13,4 +12,6 @@ urlpatterns = [
 	path('editbrd/<int:pk>', editBrd, name='editbrd'),
 	path('sbrd/add/', addBrdView, name='addbrd'),
 	path('stat/', stat, name='stat'),
+	path('cashstat/', cashstat, name='cashstat'),
+
 	]
