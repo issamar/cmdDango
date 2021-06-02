@@ -18,7 +18,7 @@ def calcLab(request):
 
 @login_required(login_url='login')
 def vislab(request):
-	getdata = Labo.objects.all().order_by('-dt')[:25]
+	getdata = Labo.objects.all().order_by('-dt')
 	if request.method== 'POST':
 		req = request.POST
 		dep = req['sdate']
