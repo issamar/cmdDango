@@ -39,29 +39,7 @@ def showData(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
 def visulizeToEdit(request):
-	
-
-	get_data = Closure.objects.all().order_by('-id')
-	
-		# if usern=="":
-		# 	count = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).count()
-		# 	pre_cash = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).aggregate(total=Sum('closure_paper'))
-		# 	cash = pre_cash['total']
-		# 	pre_cash_avg = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).aggregate(total=Avg('closure_paper'))
-		# 	cash_avg = round(pre_cash_avg['total'])
-		# 	# print(count)
-		# 	# sys.stdout.flush()
-		# 	return render(request,'visedit.html',{'count' : count, 'cash' : cash, 'cashavg' : cash_avg })
-		# if usern!="":
-			
-				
-		# 	print(aware_sdate, aware_edate)
-		# 	sys.stdout.flush()
-		# 	count = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).filter(username__username=usern).count()
-		# 	print(count)
-		# 	sys.stdout.flush()
-
-		# 	return render(request,'visedit.html',{'count' : count })
+	get_data = Closure.objects.all().order_by('-id')[:60]
 	context = {
 		'getdata' : get_data
 	}
@@ -69,7 +47,7 @@ def visulizeToEdit(request):
 
 def cashstat(request):
 	users = User.objects.all()
-	get_data = Closure.objects.values(day=TruncDay('creation_date')).annotate(Sum('closure_paper'), Sum('wasfa'), Sum('real_money'), Sum('ecart'))
+	get_data = Closure.objects.values(day=TruncDay('creation_date')).annotate(Sum('closure_paper'), Sum('wasfa'), Sum('real_money'), Sum('ecart')).order_by('-day')
 	count = Closure.objects.values(day=TruncDay('creation_date')).annotate(Count('creation_date')).count()
 	pre_get_sum = Closure.objects.all().aggregate(Sum('closure_paper'))
 	get_sum = round(pre_get_sum['closure_paper__sum'],2)
@@ -106,15 +84,27 @@ def cashstat(request):
 				max_cash = max(get_cash)
 				pre_get_gap = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).aggregate(Sum('ecart'))
 				get_gap=round(pre_get_gap['ecart__sum'])
-				get_data = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).values(day=TruncDay('creation_date')).annotate(Sum('closure_paper'), Sum('wasfa'), Sum('real_money'), Sum('ecart'))
+				get_data = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).values(day=TruncDay('creation_date')).annotate(Sum('closure_paper'), Sum('wasfa'), Sum('real_money'), Sum('ecart')).order_by('-day')
 				print(get_data)
 				sys.stdout.flush()
 				return render(request,'cashstat.html',{'count' : count, 'cash' : cash, 'avg': avg, 
 					'mincash' : min_cash,'maxcash':max_cash,'gap':get_gap, 'datas': get_data,
 					'users' : users})
 			if usern != "" :
-
-				return render(request, 'cashstat.html', {'users' : users})
+				count = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).filter(username__username= usern).count()
+				pre_cash = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).filter(username__username = usern).aggregate(Sum('closure_paper'))
+				cash = pre_cash['closure_paper__sum']
+				avg = round((cash/count),2)
+				get_cash = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).filter(username__username= usern).values_list('closure_paper', flat=True)
+				min_cash = min(get_cash)
+				max_cash = max(get_cash)
+				pre_get_gap = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).filter(username__username=usern).aggregate(Sum('ecart'))
+				get_gap = round(pre_get_gap['ecart__sum'])
+				get_data = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).filter(username__username=usern).order_by('-creation_date')
+				print(get_data)
+				sys.stdout.flush()
+				return render(request, 'cashstat.html', {'users' : users, 'cash' : cash, 'count' : count,
+					'avg': avg,'mincash' : min_cash,'maxcash':max_cash,'gap':get_gap, 'sdata': get_data})
 	return render(request,'cashstat.html', {'datas' : get_data,'users' : users, 'count' :  count,
 				 'cash' : get_sum, 'avg' : calc_avg, 'mincash': mincash, 'maxcash' : maxcash, 'gap' : all_gap})
 
@@ -364,34 +354,7 @@ def stat(request):
 			cm_t = 0
 		get_ecart = Bordereaux.objects.aggregate(sumecart=Sum('defr'))
 		ecart_t = round(get_ecart['sumecart'],2)
-		
-		# except TypeError:
-		# 	print('worked')
-		# except UnboundLocalError :
-		# 	print('worked again')
 
-		
-		
-		
-		#get the sum of each jrl
-		
-		
-		
-
-		
-
-		
-
-
-
-
-
-		
-
-
-
-
-		
 		return render(request,'stat.html', {
 				'cnasb' : cnas_b, 'casnosb' : casnos_b, 'cmb' : c_m_b, 'cnasj' : cnas_jrl, 'casnosj' : casnos_jrl,
 				'cmj' : c_m_jrl, 'cnase' : cnas_e, 'casnose' : casnos_e,'cme' : c_m_e,'mtbrd' : mtbrd, 'cnast' : cnas_t,

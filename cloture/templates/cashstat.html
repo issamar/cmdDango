@@ -102,16 +102,15 @@
 			<td> {{data.ecart__sum|floatformat:0}}</td>
 
 		</tr>
-
 		{% endfor %}
-		{% for sdate in selectedata %}
+		{% for data in sdata %}
 	
 		<tr >
-			<td> {{sdata.day}}</td>
-			<td> {{sdata.closure_paper__sum}} </td>
-			<td> {{sdata.wasfa__sum|floatformat:2}} </td>
-			<td> {{sdata.real_money__sum}} </td>
-			<td> {{sdata.ecart__sum|floatformat:0}}</td>
+			<td> {{data.creation_date}}</td>
+			<td> {{data.closure_paper}} </td>
+			<td> {{data.wasfa}} </td>
+			<td> {{data.real_money}} </td>
+			<td> {{data.ecart}}</td>
 
 		</tr>
 
