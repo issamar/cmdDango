@@ -43,6 +43,18 @@
 	</script>
 </head>
 <body>
+	<nav class="navbar navbar-light bg-light">
+  		<div id="navdiv">
+  			<a href="{% url 'home' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Home Page</button></a>
+		    
+		    <a href="{% url 'visedit' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Edit Data</button></a>
+			<a href="{% url 'visualiser' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">View Gap</button></a>
+			<a href="{% url 'convention' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Conventions Managment</button></button></a>
+		    <a href="{% url 'logout' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Logout</button></a>
+		   
+		    
+ 		</div>
+	</nav>
 	<h1> Cash Statistics </h1>
 	<div id="stat_container" class="container-fluid " >
 		<form method="POST" action="">{% csrf_token %}

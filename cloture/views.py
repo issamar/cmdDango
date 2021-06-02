@@ -58,8 +58,6 @@ def cashstat(request):
 	maxcash=max(get_maxcash)
 	get_all_gap = Closure.objects.all().aggregate(Sum('ecart'))
 	all_gap = round(get_all_gap['ecart__sum'],2)
-	print(get_all_gap)
-	sys.stdout.flush()
 	if request.method == 'POST':
 		data =  request.POST
 		usern= data['usern']
@@ -69,8 +67,6 @@ def cashstat(request):
 
 		#count = Closure.objects.values(day=TruncDay('creation_date')).annotate(Count('creation_date')).count()
 		count = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).values(day=TruncDay('creation_date')).annotate(Count('creation_date')).count()
-		print(count)
-		sys.stdout.flush()
 		if count == 0:
 			messages.error(request,' You have no Data in This Range Of Time ')
 			return render(request,'cashstat.html', {'datas' : get_data,'users' : users})
@@ -85,8 +81,6 @@ def cashstat(request):
 				pre_get_gap = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).aggregate(Sum('ecart'))
 				get_gap=round(pre_get_gap['ecart__sum'])
 				get_data = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).values(day=TruncDay('creation_date')).annotate(Sum('closure_paper'), Sum('wasfa'), Sum('real_money'), Sum('ecart')).order_by('-day')
-				print(get_data)
-				sys.stdout.flush()
 				return render(request,'cashstat.html',{'count' : count, 'cash' : cash, 'avg': avg, 
 					'mincash' : min_cash,'maxcash':max_cash,'gap':get_gap, 'datas': get_data,
 					'users' : users})
@@ -101,8 +95,6 @@ def cashstat(request):
 				pre_get_gap = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).filter(username__username=usern).aggregate(Sum('ecart'))
 				get_gap = round(pre_get_gap['ecart__sum'])
 				get_data = Closure.objects.filter(creation_date__gte=aware_sdate).filter(creation_date__lte=aware_edate).filter(username__username=usern).order_by('-creation_date')
-				print(get_data)
-				sys.stdout.flush()
 				return render(request, 'cashstat.html', {'users' : users, 'cash' : cash, 'count' : count,
 					'avg': avg,'mincash' : min_cash,'maxcash':max_cash,'gap':get_gap, 'sdata': get_data})
 	return render(request,'cashstat.html', {'datas' : get_data,'users' : users, 'count' :  count,
