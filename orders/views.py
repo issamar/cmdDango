@@ -18,8 +18,6 @@ def easyCmd(request):
 		if form.is_valid():
 			get_prod_name = Commande.objects.values_list('product', flat=True)
 			current_product = request.POST['product']
-			print(current_product.upper())
-			sys.stdout.flush()
 			if current_product.lower() not in get_prod_name:
 				form.save()
 				form = CmdForm()

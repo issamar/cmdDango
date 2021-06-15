@@ -1,0 +1,248 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Baloo Tamma 2', cursive;
+}
+.errorlist li{
+	position: relative;
+	color: red;
+}
+body{
+	background: url("/static/img/ph1.8fde65119b3b.jpg");
+	height: 650px;
+
+
+}
+#body{
+	background-color: rgba(250, 250, 250, 0.5);
+}
+#h1{
+	border: solid 1px;
+	border-radius: 20px;
+	background-color: #2b3757;
+	color: white;
+	text-align: center;
+	width: 550px;
+	margin: 10px auto;
+}
+
+nav{
+	background-color: #00cc00 ;
+	height: 42px;
+}
+img{
+	height: 33px;
+	margin: 5px;
+}
+
+#btn{
+	float: right;
+	width: 150px;
+	height: 33px;
+	border-radius: 10px;
+	border: none;
+	margin: 5px;
+}
+#btn:hover{
+	background-color: red;
+
+}
+
+.form form{
+	width: 100%;
+	margin: 10px auto;
+	display: flex;
+	flex-wrap: wrap;
+
+}
+
+#product{
+	width: 98%;
+	font-size: 18px;
+	border-radius: 5px;
+	
+	padding: 3px;
+	text-transform: uppercase;
+	margin: 5px;
+	margin-right: 10px;
+
+}
+#type{
+	width: 140px;
+	font-size: 18px;
+	border-radius: 5px;
+	
+	height: 35px;
+	margin: 5px;
+}
+#tag{
+	width: 140px;
+	font-size: 18px;
+	border-radius: 5px;
+	
+	height: 35px;
+	margin: 5px;
+}
+#user{
+	width: 140px;
+	font-size: 18px;
+	border-radius: 5px;
+	
+	height: 35px;
+	margin: 5px;
+}
+
+#validbtn{
+	width: 100px;
+	height: 35px;
+	margin: 5px;
+	border-radius: 10px;
+	border: none;
+	background-color: rgba(66, 72, 245, 0.5);
+}
+#validbtn:hover{
+	background-color: rgba(66, 72, 245, 1);
+}
+
+p label{
+	display: none;
+
+}
+
+.container{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.medicament-container{
+	width: 32%;
+	border: solid 2px black;
+	border-radius: 20px;
+	height: 430px;
+	margin: 5px;
+	text-align: center;
+}
+
+.article-container{
+	width: 32%;
+	border: solid 2px black;
+	border-radius: 20px;
+	height: 430px;
+	margin: 5px;
+	text-align: center;
+}
+.other-container{
+	width: 32%;
+	border: solid 2px black;
+	border-radius: 20px;
+	height: 430px;
+	margin: 5px;
+	text-align: center;
+}
+
+#mdc{
+	height: 340px;
+	margin: 5px;
+	text-align: left;
+	font-size: 24px;
+	overflow: auto;
+
+}
+#art{
+
+	height: 340px;
+	margin: 5px;
+	text-align: left;
+	font-size: 24px;
+	overflow: auto;
+}
+#other{
+
+	height: 340px;
+	margin: 5px;
+	text-align: left;
+	font-size: 24px;
+	overflow: auto;
+}
+.vbtn{
+	border-radius: 10px;
+	background-color: rgb(245, 191, 66);
+	padding: 5px;
+}
+.vbtn:hover{
+	background-color:rgb(66, 147, 245) ;
+}
+input[type='checkbox'] {
+    
+    width:20px;
+    height:20px;
+    background:white;
+    border-radius:5px;
+    border:2px solid #555;
+    margin-right: 5px;
+}
+input[type='checkbox']:checked {
+    background: #abd;
+}
+.sub{
+	font-size: 11px;
+	color: grey;
+}
+label.Rupture{
+	color: red;
+	text-transform: capitalize;
+}
+label.Faible{
+	color: orange;
+	text-transform: capitalize;
+}
+label.Ord{
+	color: blue;
+	text-transform: capitalize;
+}
+#msg-1{
+	margin: 5px;
+	border: solid 1px;
+	border-radius: 10px;
+	padding: 5px;
+	background-color:rgba(235, 64, 52, 0.5) ;
+	animation: blinker 1s linear infinite;
+}
+.done{
+	text-decoration: line-through;
+	text-decoration-color: black;
+
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.footer{
+	text-align: center;
+	background-color:#749c43 ;
+	height: 80px;
+	border-radius: 10px;
+	
+}
+
+
+@media(max-width: 840px){
+	#h1{
+		width: auto;
+	}
+	.form form{
+		display:flex;
+	}
+	.medicament-container{
+		width: 480px;
+	}
+	.article-container{
+		width: 480px;
+	}
+	.other-container{
+		width: 480px;
+	}
+}
