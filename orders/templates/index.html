@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>EasyCmd</title>
+	<link rel="stylesheet" type="text/css" href="{% static '/css/main.css'%}">
+
+	
+</head>
+<body >
+	<nav>
+		<img src="{% static '/img/phi.png' %}" alt="pharmacy icon">
+		<a href="{% url 'logout' %}"><button id="btn">Déconnecter</button></a>
+
+	</nav>
+	<div id="body">
+		<div id="h1"><h1>Gérer Vos Commandes Facilement</h1> </div>
+		
+		<div id="form" class="form">
+			<form method="POST" action="">{% csrf_token%}
+			{{form.as_p}}
+			<input type="submit" name="send" value="Envoyer" id="validbtn">
+			{% if messages %}
+			{% for message in messages%}
+				<p id="msg-1">{{message}}</p>
+			{% endfor%}
+			{% endif %}
+			</form>
+
+		</div>
+		<div id="container" class="container">
+			<div id="medicament-container" class="medicament-container">
+				<h2>Médicaments</h2>
+				
+				<form id="medicament-form" class="medicament-form" method="POST" action="manage/">{% csrf_token %}
+					<div id="mdc" class="mdc">
+						{% for mdc in mdcs%}
+
+
+							{% if mdc.completed == True %}
+								<label class="{{mdc.tags}} done">
+								<input type="checkbox" value="{{mdc.product}}" name="checks"   id="{{mdc.id}}">{{mdc.product}} <span class="sub">{{mdc.username}}.{{mdc.creation_date}} </span>
+								</label><br>
+							{% else %}
+								<label class="{{mdc.tags}}">
+								<input type="checkbox" value="{{mdc.product}}" name="checks"   id="{{mdc.id}}">{{mdc.product}} <span class="sub">{{mdc.username}}.{{mdc.creation_date}} </span>
+								</label><br>
+							{% endif %}
+							
+						{% endfor %}
+						
+					</div>
+					<input type="submit" name="cmd" value=" Commande Passée" class="vbtn">
+					<input type="submit" name="arr" value="Produits Arrivés" class="vbtn">
+				</form>
+				
+			</div>
+			<div id="article-container" class="article-container">
+				<h2>Articles</h2>
+				<form id="article-form" class="article-form" method="POST" action="manage/">{% csrf_token %}
+					<div id="art" class="art">
+						{% for art in arts%}
+							{% if art.completed == True %}
+								<label class="{{art.tags}} done">
+								<input type="checkbox" value="{{art.product}}" name="checks"   id="{{art.id}}">{{art.product}} <span class="sub">{{art.username}}.{{art.creation_date}} </span>
+								</label><br>
+							{% else %}
+								<label class="{{art.tags}}">
+								<input type="checkbox" value="{{art.product}}" name="checks"   id="{{art.id}}">{{art.product}} <span class="sub">{{art.username}}.{{art.creation_date}} </span>
+								</label><br>
+							{% endif %}
+						{% endfor %}
+					</div>
+					<input type="submit" name="cmd" value=" Commande Passée" class="vbtn">
+					<input type="submit" name="arr" value="Produits Arrivés" class="vbtn">
+				</form>
+			</div>
+			<div id="other-container" class="other-container">
+				<h2>Autres</h2>
+				<form id="other-form" class="other-form" method="POST" action="manage/">{% csrf_token %}
+					<div id="other" class="other">
+						{% for autre in autres%}
+							{% if autre.completed == True %}
+								<label class="{{autre.tags}} done">
+								<input type="checkbox" value="{{autre.product}}" name="checks"   id="{{autre.id}}">{{autre.product}} <span class="sub">{{autre.username}}.{{autre.creation_date}} </span>
+								</label><br>
+							{% else %}
+								<label class="{{autre.tags}}">
+								<input type="checkbox" value="{{autre.product}}" name="checks"   id="{{autre.id}}">{{autre.product}} <span class="sub">{{autre.username}}.{{autre.creation_date}} </span>
+								</label><br>
+							{% endif%}
+						{% endfor %}
+					</div>
+					<input type="submit" name="cmd" value=" Commande Passée" class="vbtn">
+					<input type="submit" name="arr" value="Produits Arrivés" class="vbtn">
+				</form>
+			</div>
+
+		</div>
+		</div>
+		<footer>
+			<div class="footer">
+				<p> Copyright©2021 Phartec. All rights reserved</p>
+				<p>Pour d'autre informations ou pour demander des produits sur commande veuillez me contacter sur cette mail : islamveto12@gmail.com</p>
+			</div>
+		</footer>
+	
+<script >
+	
+	document.getElementById('tag')[1].style.color="red";
+	document.getElementById('tag')[2].style.color="orange";
+	document.getElementById('tag')[3].style.color="#0d4991";
+
+</script>
+
+</body>
+</html>

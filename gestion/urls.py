@@ -16,14 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from gestion_accueil.views import accueil, loginPage, registerPage,logoutPage
-
+from orders.views import easyCmd, manageItems
 urlpatterns = [
     path('register/', registerPage, name='register'),
     path('login/', loginPage, name='login'),
     path('logout/', logoutPage, name='logout'),
     path('admin/', admin.site.urls),
     path('', include('gestion_accueil.urls')),
-    path('commande/', include('commande.urls')),
+    path('orders/', easyCmd, name="easycmd"),
+    path('orders/manage/', manageItems, name="manageitems"),
     path('cloture/', include('cloture.urls')),
     path('lab/', include('labo.urls')),
 
