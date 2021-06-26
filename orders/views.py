@@ -10,22 +10,32 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='login')
 def easyCmd(request):
+	user_name = request.user
 	get_mdc = Commande.objects.filter(productype='Médicament').order_by('creation_date')
+	get_mdc_count =Commande.objects.filter(productype='Médicament').count()
 	get_art = Commande.objects.filter(productype='Article').order_by('creation_date')
+	get_art_count = Commande.objects.filter(productype='Article').count()
 	get_other = Commande.objects.filter(productype='Autres').order_by('creation_date')
+	get_other_count = Commande.objects.filter(productype='Autres').count()
 	form = CmdForm(request.POST or None)
 	if request.method == 'POST':
 		if form.is_valid():
 			get_prod_name = Commande.objects.values_list('product', flat=True)
 			current_product = request.POST['product']
 			if current_product.lower() not in get_prod_name:
-				form.save()
+				instance = form.save(commit = False)
+				instance.username = user_name
+				instance.save()
+				get_mdc_count =Commande.objects.filter(productype='Médicament').count()
+				get_art_count = Commande.objects.filter(productype='Article').count()
+				get_other_count = Commande.objects.filter(productype='Autres').count()
 				form = CmdForm()
 			else:
-			 	messages.error(request,'Ce Produit exist deja ')
+			 	messages.error(request,current_product.upper() + ' exist deja ')
 			 	form = CmdForm()
 	context = {
-	'mdcs' : get_mdc,'form' : form, 'arts': get_art,'autres' : get_other
+	'mdcs' : get_mdc,'form' : form, 'arts': get_art,'autres' : get_other, 'countmdc': get_mdc_count,
+	'countart' : get_art_count, 'countother' : get_other_count
 	}
 	return render(request,'index.html',context)
 

@@ -6,14 +6,54 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>EasyCmd</title>
 	<link rel="stylesheet" type="text/css" href="{% static '/css/main.css'%}">
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 </head>
 <body >
 	<nav>
-		<img src="{% static '/img/phi.png' %}" alt="pharmacy icon">
-		<a href="{% url 'logout' %}"><button id="btn">Déconnecter</button></a>
-
+		<div class="logo">PharmaGest
+			<label class="user">({{user}})</label>
+		</div>
+		<label for="btn" class="icon">
+			<span class="fa fa-bars"></span>
+		</label>
+		<input type="checkbox" id="btn" class="hiddenbtn">
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li>
+				
+				<label for="btn-1" class="show">Daily Data + </label>
+				<a href="#">Daily Data</a>
+				<input type="checkbox" id="btn-1" class="hiddenbtn">
+				<ul>
+					<li><a href="{% url 'cloture'%}">Close</a></li>
+					<li><a href="{% url 'visualiser'%} ">Edit Gap</a></li>
+					<li><a href="{% url 'visedit'%} ">Edit(All)</a></li>
+				</ul>
+			</li>
+			<li>
+				<label for="btn-2" class="show">Conventions + </label>
+				<a href="#">Conventions</a>
+				<input type="checkbox" id="btn-2" class="hiddenbtn">
+				<ul>
+					<li><a href="{% url 'convention'%} ">Add Brd</a></li>
+					<li><a href="{% url 'convention'%}">Show Brd</a></li>
+					<li><a href="{% url 'stat'%}">Statistic</a></li>
+				</ul>
+			</li>
+			<li>
+				<label for="btn-3" class="show">Lab + </label>
+				<a href="#">Lab</a>
+				<input type="checkbox" id="btn-3" class="hiddenbtn">
+				<ul>
+					<li><a href="{% url 'calclab'%}">Add Patient</a></li>
+					<li><a href="{% url 'vislab'%}">Show patients</a></li>
+					<li><a href="{% url 'labstat'%}">Statistic</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Contact</a></li>
+			<li><a href="{% url 'logout' %}">Logout</a></li>
+		</ul>
 	</nav>
 	<div id="body">
 		<div id="h1"><h1>Gérer Vos Commandes Facilement</h1> </div>
@@ -32,7 +72,7 @@
 		</div>
 		<div id="container" class="container">
 			<div id="medicament-container" class="medicament-container">
-				<h2>Médicaments</h2>
+				<h2>Médicaments ({{countmdc}})</h2>
 				
 				<form id="medicament-form" class="medicament-form" method="POST" action="manage/">{% csrf_token %}
 					<div id="mdc" class="mdc">
@@ -58,7 +98,7 @@
 				
 			</div>
 			<div id="article-container" class="article-container">
-				<h2>Articles</h2>
+				<h2>Articles ({{countart}})</h2>
 				<form id="article-form" class="article-form" method="POST" action="manage/">{% csrf_token %}
 					<div id="art" class="art">
 						{% for art in arts%}
@@ -78,7 +118,7 @@
 				</form>
 			</div>
 			<div id="other-container" class="other-container">
-				<h2>Autres</h2>
+				<h2>Autres ({{countother}})</h2>
 				<form id="other-form" class="other-form" method="POST" action="manage/">{% csrf_token %}
 					<div id="other" class="other">
 						{% for autre in autres%}

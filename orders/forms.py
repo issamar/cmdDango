@@ -6,7 +6,7 @@ from .models import Commande
 class CmdForm(forms.ModelForm):
 	class Meta:
 		model = Commande
-		fields = ['product','productype','tags','username']
+		fields = ['product','productype','tags']
 		CTR_CHOICES = (
 			('', ''),
 			('Médicament','Médicament'),
@@ -42,10 +42,5 @@ class CmdForm(forms.ModelForm):
 				'id' : 'tag',
 				'class' : 'form-control ',
 				'placeholder': 'Tag de Produit'
-				}),
-			'username' : forms.Select(attrs = {
-				'id' : 'user',
-				'class' : 'form-control ',
-				'placeholder': "Nom d'Utilisateur"
 				})
 		}
