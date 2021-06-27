@@ -154,7 +154,9 @@ h1 {
 label {
 	font-weight: bold;
 }
-
+#listParameter label {
+	margin-left: 3px;
+}
 #parameterList {
 	border-radius: 5px;
 	width: 30%;
