@@ -1,196 +1,111 @@
+{% load static %}
 <!DOCTYPE html>
 <head>
-<title> Analysis Price Calculator</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Analysis Price Calculator</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/labo/labo.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
     
-body{ background-color: #b5e88e; }
-#intro{
-    font-size: 18px;
-    font-variant: small-caps;
-    margin: 10px;
-}
-#displayAnalyse{
-    border: 2px solid black;
-    border-radius: 20px;
-    width: 30%;
-    height: 420px;
-    margin: 10px;
-    color: brown;
- 
-    
-    
-}
-#displaySum{
-    width: 150px;
-    height: 50px;
-    border: 2px solid red;
-    border-radius: 30px;
-    float: right;
-    margin: 20px;
-    text-align: center;
-    font-size: 20px;
-    padding: 10px;
-    font-weight: bold;
-    
-    
-}
-#parameterList{
-    width: 340px;
-    height: 30px;
-    margin: 10px;
-    font-variant: small-caps;
-    font-size: 20px;
-}
-#container{
-    
-    display: flex;
-    flex-wrap: wrap;
-    border: solid black 1px
-}
-#priceParam{
-    border: 2px solid black;
-    border-radius: 20px;
-    width: 15%;
-    height: 420px;
-    margin: 10px;
 
-}
-
-
-#analyseListLbl{
-    
-    font-variant:small-caps ;
-    font-size: 24px;
-    
-    
-}
-#listParameter{
-    width: 100%;
-    height: 300px;
-    border: none;
-    font-size: 20px;
-    font-variant: small-caps;
-    background-color: #b5e88e;
-    outline: none;
-    
-    
-
-}
-#listPrice{
-    width: 100%;
-    height: 300px;
-    border: none;
-    font-size: 20px;
-    text-align: center;
-    background-color: #b5e88e;
-    outline: none;
-    
-}
-#priceListLbl{
-    font-variant:small-caps ;
-    font-size: 24px;
-    padding-left: 10px; ;
-    color: green;
-}
-#sup{
-    margin: 10px;
-    padding: 10px;
-    font-size: 20px;
-    margin-left: 30%;
-    border-radius: 10px;
-    background-color: #a1483f;
-
-}
-.input_form{
-    margin: 5px;
-    padding: 5px;
-    border-radius: 10px;
-    font-size: 14px;
-}
-#formcontainer{
-    width: 30%;
-    border: solid black 2px;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px;
-    float: right;
-
-
-
-}
-#lprice{display: none;}
-#pname, #params{text-transform: uppercase;}
-#vbtn{
-    margin-left: 40%;
-}
-label{font-weight: bold;}
 </style>
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <div id="navdiv">
-            <a href="{% url 'home' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Home Page</button></a>
-            
-            <a href="{% url 'visedit' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Edit Daily Data</button></a>
-            <a href="{% url 'convention' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Monitring 3rd party pay</button></button></a>
-            <a href="{% url 'vislab' %}"><button class="btn btn-outline-success ms-5 me-4" id="vis">View & Edit Lab</button> </a>
-            <a href="{% url 'labstat' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Lab Stat(Admin)</button></a>
-            <a href="{% url 'logout' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Logout</button></a>
-           
-            
+    <nav>
+        <div class="logo">PharmaGest
+            <label class="user">({{user}})</label>
         </div>
+        <label for="btn" class="icon">
+            <span class="fa fa-bars"></span>
+        </label>
+        <input type="checkbox" id="btn" class="hiddenbtn">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li>
+                
+                <label for="btn-1" class="show">Daily Data + </label>
+                <a href="#">Daily Data</a>
+                <input type="checkbox" id="btn-1" class="hiddenbtn">
+                <ul>
+                    <li><a href="{% url 'cloture'%}">Close</a></li>
+                    <li><a href="{% url 'visualiser'%} ">Edit Gap</a></li>
+                    <li><a href="{% url 'visedit'%} ">Edit(All)</a></li>
+                </ul>
+            </li>
+            <li>
+                <label for="btn-2" class="show">Conventions + </label>
+                <a href="#">Conventions</a>
+                <input type="checkbox" id="btn-2" class="hiddenbtn">
+                <ul>
+                    <li><a href="{% url 'convention'%} ">Add Brd</a></li>
+                    <li><a href="{% url 'convention'%}">Show Brd</a></li>
+                    <li><a href="{% url 'stat'%}">Statistic</a></li>
+                </ul>
+            </li>
+            <li>
+                <label for="btn-3" class="show">Lab + </label>
+                <a href="#">Lab</a>
+                <input type="checkbox" id="btn-3" class="hiddenbtn">
+                <ul>
+                    <li><a href="{% url 'calclab'%}">Add Patient</a></li>
+                    <li><a href="{% url 'vislab'%}">Show patients</a></li>
+                    <li><a href="{% url 'labstat'%}">Statistic</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
     </nav>
-    <h1 style="text-align: center;"> Analysis Price Calculator</h1>
+    <h1> Add Patient</h1>
     
-    <form id="form1">
-    <label id="intro" for="parameter">Please Enter The Parameters ToDo :</label><br/>
-    <input list="paramlist" id="parameterList" autofocus autocomplete onchange="addParameterToList()">
-        <datalist id="paramlist">
-            
-        </datalist>
+    <form >
+        <label for="parameter">Please Enter The Parameters ToDo :</label><br/>
+        <input  id="parameterList" list="paramlist" autofocus autocomplete onchange="addParameterToList()">
+        <datalist id="paramlist"></datalist>
     
-        
     </form>
        
  
     <div id="container">
+        <div id="hidden-div">
         <div id="displayAnalyse">
             <div id="analyseListLbl">
                 <label for="displayAnalyse"  > Analysis To do</label></br>
-                <select multiple id="listParameter">
+                <div id="listParameter">
                     
-                </select>
+                </div>
                
 
             </div>
-            <input type="submit" name="dlt" value="Delete Selected" id="sup" onclick="deleteItem()">
-            <label style="margin:5px;"> N.B : To delete an analysis select both name and price with the 'ctrl' keyboard button</label>
+            <input type="submit" name="dlt" value="Delete Selected" id="d-btn" onclick="deleteItem()">
+
         </div>
         <div id="priceParam">
             <div id="priceList">
-                <label for="priceList" id="priceListLbl"> Price </label></br>
-                <select multiple id="listPrice">
+                <label for="priceList"> Price </label></br>
+                <div id="listPrice">
                     
-                </select>
+                </div>
 
             </div>
-
+             <div id="displaySum">
+            <label id="sum">0</label> <br>
+        </div>
+        </div>
         </div>
         <div style="display: none;">
             <select multiple id="listLabPrice">
                     
             </select>
         </div>
-        <div id="displaySum">
-            <label id="sum">0</label> <br>
-        </div>
+       
         
         
     <div id="formcontainer">
         <form method="POST" action=""> {% csrf_token %}
             {{form.as_p}} 
-            <input type="submit" name="valid" value="Send Info" class="btn btn-primary" id="vbtn">
+            <input type="submit" name="valid" value="Send Info" id="vbtn">
             
         </form>
         

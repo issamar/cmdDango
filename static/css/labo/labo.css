@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+
+}
+.user{
+	font-size: 14px;
+}
+nav {
+	background: #1b1b1b;
+}
+nav:after {
+	content: '';
+	clear: both;
+	display: table;
+}
+nav .logo{
+	float: left;
+	color: white;
+	font-size: 27px;
+	font-weight: 600;
+	line-height: 70px;
+	padding-left: 60px;
+
+}
+nav ul {
+	float: right;
+	list-style: none;
+	margin-right: 40px;
+	position: relative;
+}
+nav ul li {
+	float: left;
+	display: inline-block;
+	background: #1b1b1b;
+	margin: 0 5px;
+
+}
+nav ul li a {
+	color: white;
+	text-decoration: none;
+	line-height: 70px;
+	font-size: 18px;
+	padding: 8px 15px;
+
+}
+nav ul li a:hover{
+	color: cyan;
+	border-radius: 5px;
+	box-shadow: 0 0 5px #33ffff,
+				0 0 5px #66ffff;
+}
+nav ul ul {
+	position: absolute;
+	top: 90px;
+	border-top: 3px solid cyan;
+	opacity: 0;
+	visibility: hidden;
+	transition: top .3s;
+}
+nav ul li:hover > ul {
+	top: 70px;
+	opacity: 1;
+	visibility: visible;
+}
+nav ul ul li {
+	position: relative;
+	margin: 0;
+	width: 160px;
+	float: none;
+	display: list-item;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3) ;
+}
+nav ul ul li a{
+	line-height: 50px;
+}
+nav ul ul li a:hover{
+	color: cyan;
+	box-shadow: none;
+}
+.show,.icon, .hiddenbtn {
+	display: none;
+}
+
+@media all and (max-width:  968px){
+
+	nav ul {
+		margin-right: 0px;
+		float: left;
+	}
+	nav .logo {
+		padding-left: 30px;
+		width: 100%;
+	}
+	nav ul li, nav ul ul li {
+		display: block;
+		width: 100%;
+	}
+	nav ul ul {
+		top: 70px;
+		position: static;
+		border-top: none;
+		float: none;
+		display: none;
+		opacity: 1;
+		visibility: hidden;
+	}
+	.show {
+		display: block;
+		color: white;
+		font-size: 18px;
+		padding: 0 20px;
+		line-height: 70px;
+		cursor: pointer;
+	}
+	.show:hover {
+		color: cyan;
+	}
+	nav ul li a:hover{
+		box-shadow: none;
+	}
+	.icon{
+		display: block;
+		color: white ;
+		position: absolute;
+		right: 40px;
+		line-height: 70px;
+		font-size: 24px;
+		cursor: pointer;
+	}
+	.show + a, ul{
+		display: none;
+	}
+	[id^=btn]:checked + ul{
+		display: block;
+	}
+	nav ul ul a{
+		padding-left: 40px;
+	}
+	nav ul ul li{
+		border-bottom: 0px;
+	}
+}
+body{
+	background-color: rgba(69, 199, 4, .8);
+}
+h1 {
+	text-align: center;
+}
+label {
+	font-weight: bold;
+}
+
+#parameterList {
+	border-radius: 5px;
+	width: 30%;
+	font-size: 20px;
+	text-transform: uppercase;
+	margin: 5px;
+	margin-left: 15px;
+}
+#container {
+	width: 95%;
+	margin: 5px;
+	padding: 5px;
+	display: flex;
+
+}
+#hidden-div{
+	display: flex;
+	width: 45%;
+}
+#displayAnalyse {
+	border: solid black 2px;
+	border-radius: 10px;
+	width: 70%;
+	height: 350px;
+	margin: 5px;
+	padding: 5px;
+}
+#analyseListLbl {
+	height: 350px;
+}
+#priceParam{
+	border: solid 2px black;
+	border-radius: 10px;
+	width: 30%;
+	height: 350px;
+	margin: 5px;
+	padding: 5px;
+}
+#priceList{
+	height: 350px;
+}
+
+#displaySum{
+	border-radius: 10px;
+	background-color: darkred;
+	margin: 5px;
+	padding: 5px;
+	text-align: center;
+}
+#formcontainer {
+	border-radius: 10px;
+	width: 22%;
+	margin: 5px;
+	margin-top: -110px;
+	padding: 5px;
+	background-color: rgb(139, 190, 232);
+	margin-left: 200px;
+}
+.form-control{
+	width: 250px;
+	border-radius: 10px;
+	font-size: 20px;
+	outline: none;
+}
+p label{
+	display: block;
+}
+p{
+	margin: 5px;
+}
+#lprice{
+	display: none;
+}
+#d-btn{
+	border-radius: 10px;
+	background-color: rgb(255, 87, 61);
+	font-size: 18px;
+	padding: 5px;
+	margin-left: 30%;
+}
+#d-btn:hover{
+	background-color: rgb(15, 173, 7);
+}
+#vbtn{
+	border-radius: 10px;
+	background-color: rgb(255, 87, 61);
+	font-size: 18px;
+	padding: 5px;
+	margin-left: 30%;
+}
+#vbtn:hover{
+	background-color: rgb(15, 173, 7);
+}
+@media(max-width:  960px){
+	#parameterList{
+		width: 90%;
+	}
+	#container{
+		display: block;
+	}
+	#hidden-div{
+		display: flex;
+		width: 95%;
+		height: 450px;
+	}
+	#displayAnalyse{
+		width: 60%;
+	}
+	#priceParam{
+		width: 40%;
+	}
+	#formcontainer{
+		width: 95%;
+		margin:0px;
+
+	}
+	.form-control{
+		width: 95%;
+	}
+	#d-btn{
+		margin-left: 10%;
+	}
+}
