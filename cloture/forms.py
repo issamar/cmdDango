@@ -126,9 +126,9 @@ class BordereauxForm(forms.ModelForm):
 		}
 		labels = {
 			'pay_ctr' : ("Payement center"),
-			'n_brd' : ("Slip Number : "),
+			'n_brd' : ("Slip Number"),
 			'dt_clo' : (" Slip Closing Date"),
-			'n_ord' : ("Prescription Number (Slip)"),
+			'n_ord' : ("Prescription Count"),
 			'm_brd' : ("Slip Amount"),
 			'dt_depot' : ("Diposit Date(Slip)"),
 			# 'dt_jrl' : ("Date du Journal"),

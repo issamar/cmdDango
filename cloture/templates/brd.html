@@ -1,115 +1,87 @@
 
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Conventions Managment</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-	<style >
-
-
-		h2{
-			text-align: center;
-			
-			border-radius: 20px;
-			background-color: #86adbf;
-			padding: 5px;
-			margin: 5px;
-
-		}
-		
-		.input{
-			border-radius: 20px;
-			border-color: #fc034e;
-			padding: 10px;
-			font-size: 20px;
-			outline: none;
-			margin: 10px;
-
-		}
-
-		#aj_container{
-			border : solid black 2px;
-			border-radius: 10px;
-			margin: auto;
-			text-align: center;
-			width: 30%;
-			padding: 20px;
-		}
-		#valid{
-			width: 100px;
-			background-color: green;
-			border-radius: 20px;
-			font-size: 20px;
-			padding: 10px;
-			margin: 10px;
-		}
-				#disp_container{
-			border: solid black 3px;
-			float: left;
-			margin: 15px;
-		}
-		table, th, td{
-			border:1px solid black;
-			border-collapse: collapse;
-			padding: 7px
-			margin:auto;
-			font-size: 15px
-		}
-		h6{
-			padding: 0px;
-			margin: 0px;
-		}
-		#message{
-			border:solid black 1px;
-			border-radius: 20px;
-			background-color: #2d9646;
-			font-weight: bold;
-
-		}
-		#navdiv{margin-left: 26%}
-	
-	</style>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/closure/brd.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-	<nav class="navbar navbar-light bg-light">
-  		<div id="navdiv">
-  			<a href="{% url 'home' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Home Page</button></a>
-		    
-		    <a href="{% url 'visedit' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Edit Daily Data</button></a>
-		      <a href="{% url 'stat'%}"> <button class="btn btn-outline-success ms-5 me-4" type="button">Conventions Statistic</button></a>
-			
-		    <a href="{% url 'logout' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Logout</button></a>
-		   
-		    
- 		</div>
+	<nav>
+		<div class="logo">PharmaGest
+			<label class="user">({{user}})</label>
+		</div>
+		<label for="btn" class="icon">
+			<span class="fa fa-bars"></span>
+		</label>
+		<input type="checkbox" id="btn" class="hiddenbtn">
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li>
+				
+				<label for="btn-1" class="show">Daily Data + </label>
+				<a href="#">Daily Data</a>
+				<input type="checkbox" id="btn-1" class="hiddenbtn">
+				<ul>
+					<li><a href="{% url 'cloture'%}">Close</a></li>
+					<li><a href="{% url 'visualiser'%} ">Edit Gap</a></li>
+					<li><a href="{% url 'visedit'%} ">Edit(All)</a></li>
+				</ul>
+			</li>
+			<li>
+				<label for="btn-2" class="show">Conventions + </label>
+				<a href="#">Conventions</a>
+				<input type="checkbox" id="btn-2" class="hiddenbtn">
+				<ul>
+					<li><a href="{% url 'convention'%} ">Add Brd</a></li>
+					<li><a href="{% url 'convention'%}">Show Brd</a></li>
+					<li><a href="{% url 'stat'%}">Statistic</a></li>
+				</ul>
+			</li>
+			<li>
+				<label for="btn-3" class="show">Lab + </label>
+				<a href="#">Lab</a>
+				<input type="checkbox" id="btn-3" class="hiddenbtn">
+				<ul>
+					<li><a href="{% url 'calclab'%}">Add Patient</a></li>
+					<li><a href="{% url 'vislab'%}">Show patients</a></li>
+					<li><a href="{% url 'labstat'%}">Statistic</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Contact</a></li>
+			<li><a href="{% url 'logout' %}">Logout</a></li>
+		</ul>
 	</nav>
 	<div id="container">
 		<div id="aj_container">
 
 			<h2> Add a Convention Info </h2>
-			<form method="POST" action="add/">{% csrf_token %}
+			<form method="POST" action="add/" id="aj_form">{% csrf_token %}
 				
-				{{form}}
+				{{form.as_p}}
 				{{form.errors}}
 				<input type="submit" name="valider" value="Valider" id="valid">
 
-				{% if messages%}
-				{% for message in messages %}
-				<div id="message">{{message}}</div>
-					
-				{% endfor %}
-				{% endif %}
+				
 			</form>
 		
 		
 	</div>
+	{% if messages%}
+		{% for message in messages %}
+			<div id="message">{{message}}</div>
+					
+		{% endfor %}
+	{% endif %}
 	<div id="disp_container">
 		<table class="table table-hover ">
 			<tr>
-				<th>center</th>
+				<th>Center</th>
 				<th>Slip N°</th>
 				<th>Closing Date</th>
-				<th>N° presq</th>
+				<th>Pres.C</th>
 				<th>Slips Amount</th>
 				<th>Diposit Day</th>
 				<th>Sheet Date</th>
@@ -124,21 +96,42 @@
 
 		
 		{% for brd in brds %}
-			<tr>
-				<td> {{brd.pay_ctr}} </td>
-				<td> <a href="{%url 'editbrd' brd.id %}">{{brd.n_brd}}</a> </td>
-				<td> {{brd.dt_clo}} </td>
-				<td> {{brd.n_ord}} </td>
-				<td> {{brd.m_brd}} </td>
-				<td> {{brd.dt_depot}} </td>
-				<td> {{brd.dt_jrl}} </td>
-				<td> {{brd.n_ord_jrl}} </td>
-				<td> {{brd.m_jrl}} </td>
-				<td> {{brd.dt_pay}} </td>
-				<td> {{brd.defr}} </td>
-				<td>{{brd.def_o}}</td>
-				<td>  {% if brd.payement == True %} Payed {%else%} Not Payed {% endif %}</td>
-			</tr>
+			
+			{% if brd.payement == True %}
+
+				<tr style="background-color: green">
+					<td> {{brd.pay_ctr}} </td>
+					<td> <a href="{%url 'editbrd' brd.id %}">{{brd.n_brd}}</a> </td>
+					<td> {{brd.dt_clo}} </td>
+					<td> {{brd.n_ord}} </td>
+					<td> {{brd.m_brd}} </td>
+					<td> {{brd.dt_depot}} </td>
+					<td> {{brd.dt_jrl}} </td>
+					<td> {{brd.n_ord_jrl}} </td>
+					<td> {{brd.m_jrl}} </td>
+					<td> {{brd.dt_pay}} </td>
+					<td> {{brd.defr}} </td>
+					<td>{{brd.def_o}}</td>
+					<td >  {% if brd.payement == True %} Payed {%else%} Not Payed {% endif %}</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td> {{brd.pay_ctr}} </td>
+					<td> <a href="{%url 'editbrd' brd.id %}">{{brd.n_brd}}</a> </td>
+					<td> {{brd.dt_clo}} </td>
+					<td> {{brd.n_ord}} </td>
+					<td> {{brd.m_brd}} </td>
+					<td> {{brd.dt_depot}} </td>
+					<td> {{brd.dt_jrl}} </td>
+					<td> {{brd.n_ord_jrl}} </td>
+					<td> {{brd.m_jrl}} </td>
+					<td> {{brd.dt_pay}} </td>
+					<td> {{brd.defr}} </td>
+					<td>{{brd.def_o}}</td>
+					<td >  {% if brd.payement == True %} Payed {%else%} Not Payed {% endif %}</td>
+				</tr>
+
+			{% endif %}
 
 		{% endfor %}
 		</table>
