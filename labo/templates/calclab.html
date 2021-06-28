@@ -164,19 +164,19 @@ function addParameterToList(){
         var priceOption = document.createElement('label');
         priceOption.value = elemPrice;
         priceOption.textContent=elemPrice;
-        priceOption.className = "price"
+        priceOption.className = "prx"
         priceListContainer.appendChild(priceOption);
         var nLine = document.createElement('br');
         priceListContainer.appendChild(nLine);
         tempPrice.push(elemPrice);
-
+        
 
         var labPriceOption = document.createElement('option');
         labPriceOption.value = elemLabPrice;
         labPriceOption.textContent=elemLabPrice;
         labPriceListContainer.appendChild(labPriceOption);
         tempLabPrice.push(elemLabPrice);
-        
+        console.log(tempLabPrice)
         document.getElementById('parameterList').value = '';
      
         var sum = tempPrice.reduce(function(a,b){
@@ -206,18 +206,16 @@ function addParameterToList(){
  function deleteItem(){
     var boxes = document.getElementsByClassName('check');
     var texts = document.getElementsByClassName('lbl');
-    var prices = document.getElementsByClassName('price');
+    var prices = document.getElementsByClassName('prx');
     for(var i = 0; i<boxes.length; i++){
         box = boxes[i];
         txt = texts[i];
-        price = prices[i];
+        pric = prices[i];
         if(box.checked){
             indexItem = tempAnalyse.indexOf(box.value)
-            console.log(indexItem)
-            console.log(price)
             box.parentNode.removeChild(box);
             txt.parentNode.removeChild(txt);
-            price.parentNode.removeChild(prices[indexItem])
+            pric.parentNode.removeChild(prices[indexItem])
         }
     }
     
@@ -227,7 +225,7 @@ function addParameterToList(){
    
     
     tempLabPrice.splice(indexItem,1)
-    
+    console.log(tempLabPrice)
     var sum = tempPrice.reduce(function(a,b){
         return a+b;
     },0);
