@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -19,6 +18,7 @@
 		<input type="checkbox" id="btn" class="hiddenbtn">
 		<ul>
 			<li><a href="/">Home</a></li>
+			<li><a href="{% url 'easycmd'%} ">Orders</a></li>
 			<li>
 				
 				<label for="btn-1" class="show">Daily Data + </label>
@@ -28,6 +28,7 @@
 					<li><a href="{% url 'cloture'%}">Close</a></li>
 					<li><a href="{% url 'visualiser'%} ">Edit Gap</a></li>
 					<li><a href="{% url 'visedit'%} ">Edit(All)</a></li>
+					<li><a href="{% url 'cashstat'%} ">Statistic</a></li>
 				</ul>
 			</li>
 			<li>
@@ -99,7 +100,7 @@
 			
 			{% if brd.payement == True %}
 
-				<tr style="background-color: green">
+				<tr style="color:green;">
 					<td> {{brd.pay_ctr}} </td>
 					<td> <a href="{%url 'editbrd' brd.id %}">{{brd.n_brd}}</a> </td>
 					<td> {{brd.dt_clo}} </td>

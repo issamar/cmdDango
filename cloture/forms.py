@@ -7,7 +7,6 @@ class ClosureForm(forms.ModelForm):
 	class Meta:
 		model = Closure
 		fields = [
-			'username',
 			'start_money',
 			'closure_money',
 			'closure_paper',
@@ -18,10 +17,6 @@ class ClosureForm(forms.ModelForm):
 
 
 		widgets = {
-			'username' : forms.Select(attrs={
-				'id':'str_mny',
-				'class' : 'form-control'
-				}),
 			'start_money' : forms.NumberInput(attrs={
 				'id':'str_mny',
 				'class' : 'form-control'
@@ -51,7 +46,6 @@ class ClosureForm(forms.ModelForm):
 		}
 
 		labels = {
-			'username' : ("Username"),
 			'start_money' : ("Start Money"),
 			'closure_money' : ("Closing Money"),
 			'closure_paper' : ("Closing Paper"),

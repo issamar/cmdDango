@@ -16,12 +16,17 @@ from django.db.models.functions import TruncDay
 # Create your views here.
 @login_required(login_url='login')
 def closure(request):
+	user_name = request.user
+	some_data = Closure.objects.all().order_by('-id')[:12]
+	
 	form = ClosureForm(request.POST or None)
 	if form.is_valid():
-		form.save()
+		instance = form.save(commit = False)
+		instance.username = user_name
+		instance.save()
 		form = ClosureForm()
 	context = {
-		'form' : form
+		'form' : form, 'datas' : some_data
 
 	}
 	return render(request,'cloture.html', context)
@@ -29,11 +34,7 @@ def closure(request):
 @login_required(login_url='login')
 def showData(request):
 
-	some_data = Closure.objects.all().order_by('-id')[:10]
-	context = {
-		'datas' : some_data
-	}
-	return render(request,'visualiser.html', context)
+	return redirect('cloture')
 
 
 @login_required(login_url='login')
@@ -45,6 +46,9 @@ def visulizeToEdit(request):
 	}
 	return render(request,'visedit.html',context)
 
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def cashstat(request):
 	users = User.objects.all()
 	get_data = Closure.objects.values(day=TruncDay('creation_date')).annotate(Sum('closure_paper'), Sum('wasfa'), Sum('real_money'), Sum('ecart')).order_by('-day')

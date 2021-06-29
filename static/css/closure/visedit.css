@@ -7,15 +7,9 @@
 	font-family: 'Poppins', sans-serif;
 
 }
-#message{
-    color: black;
-    background-color: green;
-    margin: 10px auto;
-    text-align: center;
-    width: 300px;
-    height: 50px;
-    padding: 10px;
-    border-radius: 15px;
+.errorlist li{
+	position: relative;
+	color: red;
 }
 
 .user{
@@ -155,96 +149,27 @@ nav ul ul li a:hover{
 	nav ul ul li{
 		border-bottom: 0px;
 	}
-	form#aj_form{
-		display: block;
+	.tohide{
+		display: none;
 	}
-	p {
-		margin: 7px;
-		text-align: center;
-		
-	}
-	p label{
-		display: block;
-	}
-	input#valid{
-		margin-top : 5px;
-		margin-left: 38%;
+	table{
+		font-size: 11px;
 	}
 }
-
-body{
-	background-color: whitesmoke;
+body {
+	background: #9da9d1;
 }
-h2{
-	text-align: center;
-	border-radius: 7px;
-	background-color: white;
-	margin: auto;
-	width: 350px;
-	margin-top: -25px;
-	margin-bottom: 15px;
-}
-#aj_container{
-	border: 1px solid black;
-	border-radius: 5px;
-	margin: 20px 7px;
-	padding: 7px;
-}
-#aj_form{
-	display: flex;
-}
-
-
-
-#valid{
-	width: 100px;
-	background: green;
-	height: 40px;
-	border-radius: 10px;
-	margin-top: 24px;
-	margin-right:40px ;
-}
-input {
-	height: 40px;
-	border-radius: 10px;
-	font-size: 18px;
-	padding: 0px;
-	outline: none;
-}
-select{
-	width: 150px;
-	border-radius: 10px;
-	font-size: 18px;
-	height: 40px;
-
-}
-
-#nbrd{
-	width: 100px;
-}
-#dt_clo{
-	width: 200px;
-}
-#nord{
-	width: 60px;
-}
-#mbrd {
-	width: 100px;
-}
-#dtdepot{
-	width: 200px;
-}
-
-table,th {
+table {
 	border: 2px solid black;
 	border-collapse: collapse;
 	padding: 5px;
+	margin: 10px;
 }
-
+th{
+	border-bottom: 2px solid black;
+	padding: 10px;
+}
 td{
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid grey;
 	padding: 5px;
-}
-tr:hover{
-	background-color: rgba(90, 140, 219, .5);
 }

@@ -1,42 +1,74 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-	<title>View Data and Edit</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-	<style>
-		#h{text-decoration: none;}
-		#stat_container{
-			margin: 5px;
-			padding: 5px;
-			background-color: #a1a08c;
-			border-radius: 20px;
-		}
-		#table1{
-			margin: 10px;
-		}
-	</style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>View Daily Data and Edit</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/closure/visedit.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	
 </head>
 <body>
-	<nav class="navbar navbar-light bg-light">
-	  <div class="container-fluid"  style="text-align: center;">
-	    <h1 class="navbar-brand">Daily Data </h1>
-	    <button class="btn btn-outline-success" type="submit"><a id="h" href="{% url 'cashstat'%}" style="float: right;">Cash Statistics</a></button>
-		   
-
-		<button class="btn btn-outline-success" type="submit"><a id="h" href="/" style="float: right;">Home Page</a></button>
-		   
-	  </div>
+	<nav>
+		<div class="logo">PharmaGest
+			<label class="user">({{user}})</label>
+		</div>
+		<label for="btn" class="icon">
+			<span class="fa fa-bars"></span>
+		</label>
+		<input type="checkbox" id="btn" class="hiddenbtn">
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li><a href="{% url 'easycmd'%}">Orders</a></li>
+			
+			<li>
+				
+				<label for="btn-1" class="show">Daily Data + </label>
+				<a href="#">Daily Data</a>
+				<input type="checkbox" id="btn-1" class="hiddenbtn">
+				<ul>
+					<li><a href="{% url 'cloture'%}">Close</a></li>
+					<li><a href="{% url 'visualiser'%} ">Edit Gap</a></li>
+					<li><a href="{% url 'visedit'%} ">Edit(All)</a></li>
+					<li><a href="{% url 'cashstat'%} ">Statistic</a></li>
+				</ul>
+			</li>
+			<li>
+				<label for="btn-2" class="show">Conventions + </label>
+				<a href="#">Conventions</a>
+				<input type="checkbox" id="btn-2" class="hiddenbtn">
+				<ul>
+					<li><a href="{% url 'convention'%} ">Add Brd</a></li>
+					<li><a href="{% url 'convention'%}">Show Brd</a></li>
+					<li><a href="{% url 'stat'%}">Statistic</a></li>
+				</ul>
+			</li>
+			<li>
+				<label for="btn-3" class="show">Lab + </label>
+				<a href="#">Lab</a>
+				<input type="checkbox" id="btn-3" class="hiddenbtn">
+				<ul>
+					<li><a href="{% url 'calclab'%}">Add Patient</a></li>
+					<li><a href="{% url 'vislab'%}">Show patients</a></li>
+					<li><a href="{% url 'labstat'%}">Statistic</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Contact</a></li>
+			<li><a href="{% url 'logout' %}">Logout</a></li>
+		</ul>
 	</nav>
 	
-	<table class="table table-hover ">
+	<table >
 		<tr id="tr1">
 			<th>Creation Date</th>
-			<th> Username</th>
-			<th> Start Money</th>
-			<th>Closing Money</th>
+			<th class="tohide"> Username</th>
+			<th class="tohide"> Start Money</th>
+			<th class="tohide">Closing Money</th>
 			<th>Closing Paper</th>
-			<th> Known Gap</th>
-			<th>Gap Details</th>
+			<th class="tohide"> Known Gap</th>
+			<th class="tohide">Gap Details</th>
 			<th>Software</th>
 			<th>Cash Box</th>
 			<th>Calc Gap</th>
@@ -46,14 +78,14 @@
 	
 			<tr id="{{data.id}}">
 				<td> {{data.creation_date}}</td>
-				<td> {{data.username}}</td>
-				<td> {{data.start_money}} </td>
-				<td> {{data.closure_money}}</td>
+				<td class="tohide"> {{data.username}}</td>
+				<td class="tohide"> {{data.start_money}} </td>
+				<td class="tohide"> {{data.closure_money}}</td>
 				<td> {{data.closure_paper}} </td>
-				<td> {{data.money}}</td>
-				<td> {{data.details}}</td>
+				<td class="tohide"> {{data.money}}</td>
+				<td class="tohide"> {{data.details}}</td>
 				<td> {{data.wasfa}} </td>
-				<td> {{data.real_money}} </td>
+				<td style="color:green;"> {{data.real_money}} </td>
 				<td> {{data.ecart}}</td>
 				<td><a href=" {% url 'editad' data.id %} ">Edit</a></td>
 			</tr>

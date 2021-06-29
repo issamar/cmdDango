@@ -155,96 +155,74 @@ nav ul ul li a:hover{
 	nav ul ul li{
 		border-bottom: 0px;
 	}
-	form#aj_form{
+	div#gcontainer{
+	display: block;
+	}
+	div#container-1{
+		border: 1px solid black;
+		margin: 10px;
+		padding: 10px;
+		border-radius: 7px;
+	}
+	#container-2{
+		border: 1px solid black;
+		margin: 10px;
+		padding: 10px;
+		border-radius: 7px;
+		font-size: 14px;
+	}
+	div#container-1 form{
 		display: block;
+		margin-left: 15%;
 	}
-	p {
-		margin: 7px;
-		text-align: center;
-		
+	input#v-btn{
+		margin-left: 100px;
+		margin-top: 10px;
 	}
-	p label{
-		display: block;
-	}
-	input#valid{
-		margin-top : 5px;
-		margin-left: 38%;
+	div#container-1 form #date-2{
+		margin: 4px;
 	}
 }
 
 body{
 	background-color: whitesmoke;
 }
-h2{
-	text-align: center;
-	border-radius: 7px;
-	background-color: white;
-	margin: auto;
-	width: 350px;
-	margin-top: -25px;
-	margin-bottom: 15px;
-}
-#aj_container{
-	border: 1px solid black;
-	border-radius: 5px;
-	margin: 20px 7px;
-	padding: 7px;
-}
-#aj_form{
+
+#gcontainer{
 	display: flex;
 }
-
-
-
-#valid{
-	width: 100px;
-	background: green;
-	height: 40px;
-	border-radius: 10px;
-	margin-top: 24px;
-	margin-right:40px ;
+#container-1{
+	border: 1px solid black;
+	margin: 10px;
+	padding: 10px;
+	border-radius: 7px;
+	margin-left: 15%;
 }
-input {
-	height: 40px;
-	border-radius: 10px;
-	font-size: 18px;
-	padding: 0px;
-	outline: none;
+#container-2{
+	border: 1px solid black;
+	margin: 10px;
+	padding: 10px;
+	border-radius: 7px;
 }
-select{
-	width: 150px;
-	border-radius: 10px;
-	font-size: 18px;
-	height: 40px;
-
-}
-
-#nbrd{
-	width: 100px;
-}
-#dt_clo{
-	width: 200px;
-}
-#nord{
-	width: 60px;
-}
-#mbrd {
-	width: 100px;
-}
-#dtdepot{
-	width: 200px;
-}
-
-table,th {
-	border: 2px solid black;
+table, th{
+	border: 1px solid black;
 	border-collapse: collapse;
+	margin: 10px;
 	padding: 5px;
-}
 
-td{
-	border-bottom: 1px solid black;
-	padding: 5px;
 }
-tr:hover{
-	background-color: rgba(90, 140, 219, .5);
+#v-btn{
+	background-color: rgba(41, 241, 195, 1);
+	padding: 5px;
+	border-radius: 5px;
+	margin-left: 5px;
+}
+#v-btn:hover{
+	background-color: rgba(35, 203, 167, 1);
+}
+.date{
+	font-size: 16px;
+}
+#container-1 form{
+	display: flex;
 }

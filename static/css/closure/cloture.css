@@ -7,15 +7,9 @@
 	font-family: 'Poppins', sans-serif;
 
 }
-#message{
-    color: black;
-    background-color: green;
-    margin: 10px auto;
-    text-align: center;
-    width: 300px;
-    height: 50px;
-    padding: 10px;
-    border-radius: 15px;
+.errorlist li{
+	position: relative;
+	color: red;
 }
 
 .user{
@@ -155,86 +149,78 @@ nav ul ul li a:hover{
 	nav ul ul li{
 		border-bottom: 0px;
 	}
-	form#aj_form{
+	div#container{
+		width: 97%;
 		display: block;
+
 	}
-	p {
-		margin: 7px;
-		text-align: center;
-		
+	div#div-1{
+		width: 100%;
+
 	}
-	p label{
-		display: block;
+	div#div-2{
+		margin: 0px;
+		margin-left: 0px;
+
 	}
-	input#valid{
-		margin-top : 5px;
-		margin-left: 38%;
+	table{
+		font-size: 11px;
+		padding: 0px;
+		margin-top: 10px;
 	}
 }
 
-body{
-	background-color: whitesmoke;
+
+
+body {
+	background: #9da9d1;
 }
-h2{
-	text-align: center;
-	border-radius: 7px;
-	background-color: white;
-	margin: auto;
-	width: 350px;
-	margin-top: -25px;
-	margin-bottom: 15px;
-}
-#aj_container{
-	border: 1px solid black;
-	border-radius: 5px;
-	margin: 20px 7px;
-	padding: 7px;
-}
-#aj_form{
+#container{
 	display: flex;
+	margin: 5px;
+	padding: 5px;
 }
-
-
-
-#valid{
-	width: 100px;
-	background: green;
-	height: 40px;
-	border-radius: 10px;
-	margin-top: 24px;
-	margin-right:40px ;
+h1{
+	text-align: center;
 }
-input {
-	height: 40px;
+#div-1 {
+	width: 30%;
+	border: 2px solid black;
 	border-radius: 10px;
-	font-size: 18px;
-	padding: 0px;
+	padding-left: 15px;
+}
+p{
+	margin: 5px;
+}
+p label{
+	display: block;
+}
+p input {
+	border-radius: 7px;
 	outline: none;
-}
-select{
-	width: 150px;
-	border-radius: 10px;
 	font-size: 18px;
-	height: 40px;
+	padding-left: 5px;
 
 }
-
-#nbrd{
-	width: 100px;
+p label{
+	font-weight: bold;
 }
-#dt_clo{
-	width: 200px;
+#send{
+	border-radius: 5px;
+	margin: 7px;
+	margin-left: 40%;
+	width: 70px;
+	font-size: 20px;
+	background: skyblue;
 }
-#nord{
-	width: 60px;
-}
-#mbrd {
-	width: 100px;
-}
-#dtdepot{
-	width: 200px;
+#send:hover{
+	background: green;
 }
 
+
+#div-2 {
+	margin-left: 50px;
+}
 table,th {
 	border: 2px solid black;
 	border-collapse: collapse;
@@ -244,7 +230,4 @@ table,th {
 td{
 	border-bottom: 1px solid black;
 	padding: 5px;
-}
-tr:hover{
-	background-color: rgba(90, 140, 219, .5);
 }
