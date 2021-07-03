@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-	
+
 *{
 	margin: 0;
 	padding: 0;
@@ -7,9 +7,15 @@
 	font-family: 'Poppins', sans-serif;
 
 }
-.errorlist li{
-	position: relative;
-	color: red;
+#msg{
+    color: black;
+    background-color: green;
+    margin: 10px auto;
+    text-align: center;
+    width: 700px;
+    height: 50px;
+    padding: 10px;
+    border-radius: 15px;
 }
 
 .user{
@@ -149,30 +155,69 @@ nav ul ul li a:hover{
 	nav ul ul li{
 		border-bottom: 0px;
 	}
-	.tohide{
-		display: none;
+	div#form-div{
+		display: block;
+		width: 98%;
+		text-align: center;
 	}
-	table{
-		font-size: 11px;
+	div#form-div label{
+		display: block;
+	}
+	div#form-div input{
+		display: block;
+		text-align: center;
+		margin: 1px auto;
 	}
 }
-body {
-	background: #9da9d1;
+
+body{
+	background-color: rgba(69, 199, 4, .8);
 }
-table {
-	border: 2px solid black;
-	border-collapse: collapse;
+h1{
+	background-color: white;
+	margin: 10px auto;
+	width: 250px;
+	border-radius: 7px;
+	text-align: center;
+}
+
+#form-div{
+	background-color: grey;
+	margin: 5px auto;
+	width: 950px;
+	padding: 10px;
+	border-radius: 10px;
+}
+#form-div label{
+	font-weight: bold;
+}
+#form-div input{
+	font-size: 18px;
+	border-radius: 5px;
+	margin: 5px;
+}
+#v-date{
 	padding: 5px;
-	margin: 10px;
 }
-th{
+#v-date:hover{
+	background-color: green;
+}
+#table-div table {
+	padding: 10px;
+	border-collapse: collapse;
+	margin: 5px auto;
+}
+#table-div table th{
 	border-bottom: 2px solid black;
 	padding: 10px;
 }
-td{
-	border-bottom: 1px solid grey;
-	padding: 5px;
+#table-div table td{
+	border-bottom: 1px solid black;
+	padding: 10px;
 }
-tr:hover{
-	background-color: whitesmoke;
+#table-div table tr:hover{
+	background-color: white;
+}
+#p{
+	width: 500px;
 }

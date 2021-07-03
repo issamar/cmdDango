@@ -1,85 +1,80 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Laboratoty Stat</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-	<style>
-		h1{
-			text-align:  center;
-		}
-		#dtcontainer{
-			margin: auto;
-			padding: 10px;
-			border: solid black 2px;
-			border-radius: 20px;
-			background-color: #e8f571;
-			text-align: center;
-		}
-		.dt{
-			font-size: 18px
-		}
-		#btn1{
-			margin-left: 5%;
-		}
-		#pcontainer{
-			display: flex;
-			flex-wrap: wrap;
-		}
-		.divs{
-
-			margin: 10%;
-			padding: 10px;
-		}
-		th , td{
-			
-			padding: 10px;
-
-		}
-		th{
-			border-radius: 20px;
-			background-color: #f5c471;
-		}
-		td{
-			border-radius: 20px;
-			background-color: #73f571;
-			height: 50px;
-		}
-	</style>
-
-
+	<link rel="stylesheet" type="text/css" href="{% static 'css/labo/labstat.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body >
-	<nav class="navbar navbar-light bg-light">
-  		<div id="navdiv">
-  			<a href="{% url 'home' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Home Page</button></a>
-		    
-		    <a href="{% url 'calclab' %}"> <button class="btn btn-outline-success ms-5 me-4" type="button"> Price Lab Calc </button></a>
-		      <a href="{% url 'vislab'%}"> <button class="btn btn-outline-success ms-5 me-4" type="button">View Lab Data</button></a>
-			
-		    <a href="{% url 'logout' %}"><button class="btn btn-outline-success ms-5 me-4" type="button">Logout</button></a>
-		   
-		    
- 		</div>
- 	</nav>
+	<nav>
+		<div class="logo">PharmaGest
+			<label class="user">({{user}})</label>
+		</div>
+		<label for="btn" class="icon">
+			<span class="fa fa-bars"></span>
+		</label>
+		<input type="checkbox" id="btn" class="hiddenbtn">
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li><a href="{% url 'easycmd'%} ">Orders</a></li>
+			<li>
+				
+				<label for="btn-1" class="show">Daily Data + </label>
+				<a href="#">Daily Data</a>
+				<input type="checkbox" id="btn-1" class="hiddenbtn">
+				<ul>
+					<li><a href="{% url 'cloture'%}">Close</a></li>
+					<li><a href="{% url 'visualiser'%} ">Edit Gap</a></li>
+					<li><a href="{% url 'visedit'%} ">Edit(All)</a></li>
+					<li><a href="{% url 'cashstat'%} ">Statistic</a></li>
+				</ul>
+			</li>
+			<li>
+				<label for="btn-2" class="show">Conventions + </label>
+				<a href="#">Conventions</a>
+				<input type="checkbox" id="btn-2" class="hiddenbtn">
+				<ul>
+					<li><a href="{% url 'convention'%} ">Add Brd</a></li>
+					<li><a href="{% url 'convention'%}">Show Brd</a></li>
+					<li><a href="{% url 'stat'%}">Statistic</a></li>
+				</ul>
+			</li>
+			<li>
+				<label for="btn-3" class="show">Lab + </label>
+				<a href="#">Lab</a>
+				<input type="checkbox" id="btn-3" class="hiddenbtn">
+				<ul>
+					<li><a href="{% url 'calclab'%}">Add Patient</a></li>
+					<li><a href="{% url 'vislab'%}">Show patients</a></li>
+					<li><a href="{% url 'labstat'%}">Statistic</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Contact</a></li>
+			<li><a href="{% url 'logout' %}">Logout</a></li>
+		</ul>
+	</nav>
 	<h1>Laboratory Statistic </h1>
-	<div id="dtcontainer">
+	<div id="form-container">
 		<form method="POST" action="">{% csrf_token %}
 			<label style="font-weight: bold;"> Select Data From : </label>
 			<input type="date" name="startdt" class="dt">
 			<label style="font-weight: bold; margin-left: 5%"> Until :</label>
 			<input type="date" name="endt" class="dt">
-			<input type="submit" name="send" value=" Get Data " class="btn btn-primary" id='btn1' >
+			<input type="submit" name="send" value=" Get Data " class="btn btn-primary" id='btn-1' >
 
 		</form>
 	</div>
-	<div id="pcontainer">
+	<div id="p-container">
 			<div id="div1" class="divs">
 				<table>
 					<tr>
 						<th>Count samples </th>
 					</tr>
 					<tr>
-						<td id="td1" style="text-align: center;"> {{count}} </td>
+						<td class="td" id="td1"> {{count}} </td>
 					</tr>
 				</table>
 			</div>
@@ -89,7 +84,7 @@
 						<th>Sum Lab Price </th>
 					</tr>
 					<tr>
-						<td id="td2" style="text-align: center;"> {{labprice}} </td>
+						<td class="td" id="td2"> {{labprice}} </td>
 					</tr>
 				</table>
 			</div>
@@ -99,7 +94,7 @@
 						<th>Sum Pharmacy Price </th>
 					</tr>
 					<tr>
-						<td id="td3" style="text-align: center;"> {{price}}</td>
+						<td class="td" id="td3"> {{price}}</td>
 					</tr>
 				</table>
 			</div>
@@ -109,7 +104,7 @@
 						<th>Payement Status </th>
 					</tr>
 					<tr>
-						<td id="td4" style="text-align: center;"> {{payement}}</td>
+						<td class="td" id="td4"> {{payement}}</td>
 					</tr>
 				</table>
 			</div>
@@ -119,7 +114,7 @@
 						<th>Not Payed Yet </th>
 					</tr>
 					<tr>
-						<td id="divhold" style="text-align: center;"> {{rest}}</td>
+						<td class="td" id="not-p"> {{rest}}</td>
 					</tr>
 				</table>
 			</div>
@@ -129,7 +124,17 @@
 						<th>Gain </th>
 					</tr>
 					<tr>
-						<td id="td5" style="text-align: center;"></td>
+						<td class="td" id="td5"></td>
+					</tr>
+				</table>
+			</div>
+			<div id="div6" class="divs">
+				<table>
+					<tr>
+						<th>Gain Réel </th>
+					</tr>
+					<tr>
+						<td class="td" id="td6"></td>
 					</tr>
 				</table>
 			</div>
@@ -145,6 +150,9 @@ function calc(){
 	var payStat = parseInt(document.getElementById('td4').textContent);
 	var benifit = phSum - ((sCount*100)+labSum);
 	document.getElementById('td5').textContent =  benifit
+	var notPayed = parseInt(document.getElementById('not-p').textContent);
+	var rGain = benifit - notPayed
+	document.getElementById('td6').textContent = rGain
 };
 </script>
 </body>
