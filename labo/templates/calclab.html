@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} 
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -62,7 +62,7 @@
     </nav>
     <h1> Ajouter Patient</h1>
     
-    <form id="ajt">
+    <form id="ajt" onsubmit="return false">
         <label for="parameter">Saisir les paramétres à realiser: </label><br/>
         <input  id="parameterList" list="paramlist" autofocus autocomplete onchange="addParameterToList()">
         <datalist id="paramlist"></datalist>
