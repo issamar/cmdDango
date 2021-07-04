@@ -144,6 +144,10 @@ nav ul ul li a:hover{
 	nav ul ul li{
 		border-bottom: 0px;
 	}
+	input#d-btn{
+		margin-left: 0;
+	}
+
 }
 body{
 	background-color: rgba(69, 199, 4, .8);
@@ -153,6 +157,9 @@ h1 {
 }
 label {
 	font-weight: bold;
+}
+#ajt label{
+	margin: 15px;
 }
 #listParameter label {
 	margin-left: 3px;
@@ -213,7 +220,7 @@ label {
 	margin-top: -110px;
 	padding: 5px;
 	background-color: rgb(139, 190, 232);
-	margin-left: 200px;
+	margin-left: 250px;
 }
 .form-control{
 	width: 250px;
@@ -235,7 +242,7 @@ p{
 	background-color: rgb(255, 87, 61);
 	font-size: 18px;
 	padding: 5px;
-	margin-left: 30%;
+	margin-left: 20%;
 }
 #d-btn:hover{
 	background-color: rgb(15, 173, 7);

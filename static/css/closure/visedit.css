@@ -160,7 +160,6 @@ body {
 	background: #9da9d1;
 }
 table {
-	border: 2px solid black;
 	border-collapse: collapse;
 	padding: 5px;
 	margin: 10px;
@@ -175,4 +174,7 @@ td{
 }
 tr:hover{
 	background-color: whitesmoke;
+}
+.small{
+	width: 70px;
 }

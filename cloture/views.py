@@ -14,6 +14,8 @@ from django.utils import timezone
 from django.utils.timezone import make_aware
 from django.db.models.functions import TruncDay
 # Create your views here.
+
+
 @login_required(login_url='login')
 def closure(request):
 	user_name = request.user
@@ -23,6 +25,11 @@ def closure(request):
 	if form.is_valid():
 		instance = form.save(commit = False)
 		instance.username = user_name
+		str_money = instance.start_money
+		clt_money = instance.closure_money
+		clt_paper = instance.closure_paper
+		real_money = (clt_paper + clt_money) - str_money
+		instance.real_money = real_money
 		instance.save()
 		form = ClosureForm()
 	context = {
@@ -119,26 +126,13 @@ def editAdForm(request, pk):
 		form  = ClosureForm(request.POST, instance=row)
 		
 		if form.is_valid():
-			#get data one by one from the form before saving it
-			cleaned_form = form.cleaned_data
-			wasfa_amount = cleaned_form['wasfa']
-			str_money = cleaned_form['start_money']
-			clo_money = cleaned_form['closure_money']
-			clo_paper = cleaned_form['closure_paper']
-			ecart_money = cleaned_form['money']
-			getdetail = cleaned_form['details']
-			#calculate the real maney + Ecart
-			real_mny = (clo_paper + clo_money) - str_money
-			get_real_money = Closure.objects.get(id=pk)
-			get_real_money.real_money= real_mny
-			ecart_calc = (real_mny - wasfa_amount ) - ecart_money 
-			#save edited data
-			get_real_money.ecart = ecart_calc
-			get_real_money.money = ecart_money
-			get_real_money.details = getdetail
-			get_real_money.wasfa = wasfa_amount
+			inst = form.save(commit=False)
+			get_gap = inst.money
+			get_soft = inst.wasfa
+			get_real_money = Closure.objects.get(id=pk).real_money
+			gap = (get_real_money - get_soft) - get_gap
+			inst.ecart = gap
 			form.save()
-			get_real_money.save()
 
 			return redirect('/cloture/viseforedit')
 	context = {

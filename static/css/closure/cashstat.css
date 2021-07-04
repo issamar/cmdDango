@@ -215,14 +215,14 @@ body {
 }
 h1{
 	text-align: center;
-	width: 250px;
+	width: 450px;
 	background-color: whitesmoke;
 	border-radius: 10px;
 	margin: 10px auto;
 }
 
 #stat_container{
-	width: 900px;
+	width: 1000px;
 	margin: 5px auto
 }
 #form-div{
@@ -284,7 +284,6 @@ h1{
 	
 }
 #journal-div table{
-	text-align: center;
 	padding: 5px;
 	margin: 10px auto;
 }

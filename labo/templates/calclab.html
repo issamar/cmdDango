@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Analysis Price Calculator</title>
+    <title> Calculatrice D'Analyse</title>
     <link rel="stylesheet" type="text/css" href="{% static '/css/labo/labo.css'%}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -12,7 +12,7 @@
 </style>
 </head>
 <body>
-    <nav>
+        <nav>
         <div class="logo">PharmaGest
             <label class="user">({{user}})</label>
         </div>
@@ -21,19 +21,19 @@
         </label>
         <input type="checkbox" id="btn" class="hiddenbtn">
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="{% url 'easycmd'%}">Orders</a></li>
+            <li><a href="/">Acceuil</a></li>
+            <li><a href="{% url 'easycmd'%}">Commande</a></li>
             
             <li>
                 
-                <label for="btn-1" class="show">Daily Data + </label>
-                <a href="#">Daily Data</a>
+                <label for="btn-1" class="show">Journal + </label>
+                <a href="#">Journal</a>
                 <input type="checkbox" id="btn-1" class="hiddenbtn">
                 <ul>
-                    <li><a href="{% url 'cloture'%}">Close</a></li>
-                    <li><a href="{% url 'visualiser'%} ">Edit Gap</a></li>
-                    <li><a href="{% url 'visedit'%} ">Edit(All)</a></li>
-                    <li><a href="{% url 'cashstat'%} ">Statistic</a></li>
+                    <li><a href="{% url 'cloture'%}">Cloturer</a></li>
+                    <li><a href="{% url 'visualiser'%} ">Editer l'écart</a></li>
+                    <li><a href="{% url 'visedit'%} ">Editer tous</a></li>
+                    <li><a href="{% url 'cashstat'%} ">Statistiques</a></li>
                 </ul>
             </li>
             <li>
@@ -41,9 +41,9 @@
                 <a href="#">Conventions</a>
                 <input type="checkbox" id="btn-2" class="hiddenbtn">
                 <ul>
-                    <li><a href="{% url 'convention'%} ">Add Brd</a></li>
-                    <li><a href="{% url 'convention'%}">Show Brd</a></li>
-                    <li><a href="{% url 'stat'%}">Statistic</a></li>
+                    <li><a href="{% url 'convention'%} ">Ajouter Brd</a></li>
+                    <li><a href="{% url 'convention'%}">Afficher Brd</a></li>
+                    <li><a href="{% url 'stat'%}">Statistiques</a></li>
                 </ul>
             </li>
             <li>
@@ -51,19 +51,19 @@
                 <a href="#">Lab</a>
                 <input type="checkbox" id="btn-3" class="hiddenbtn">
                 <ul>
-                    <li><a href="{% url 'calclab'%}">Add Patient</a></li>
-                    <li><a href="{% url 'vislab'%}">Show patients</a></li>
-                    <li><a href="{% url 'labstat'%}">Statistic</a></li>
+                    <li><a href="{% url 'calclab'%}">Ajout Patient</a></li>
+                    <li><a href="{% url 'vislab'%}">Patients</a></li>
+                    <li><a href="{% url 'labstat'%}">Statistiques</a></li>
                 </ul>
             </li>
             <li><a href="#">Contact</a></li>
-            <li><a href="{% url 'logout' %}">Logout</a></li>
+            <li><a href="{% url 'logout' %}">Déconnecter</a></li>
         </ul>
     </nav>
-    <h1> Add Patient</h1>
+    <h1> Ajouter Patient</h1>
     
-    <form >
-        <label for="parameter">Please Enter The Parameters ToDo :</label><br/>
+    <form id="ajt">
+        <label for="parameter">Saisir les paramétres à realiser: </label><br/>
         <input  id="parameterList" list="paramlist" autofocus autocomplete onchange="addParameterToList()">
         <datalist id="paramlist"></datalist>
     
@@ -74,19 +74,19 @@
         <div id="hidden-div">
         <div id="displayAnalyse">
             <div id="analyseListLbl">
-                <label for="displayAnalyse"  > Analysis To do</label></br>
+                <label for="displayAnalyse"  > Analyses A Faire</label></br>
                 <div id="listParameter">
                     
                 </div>
                
 
             </div>
-            <input type="submit" name="dlt" value="Delete Selected" id="d-btn" onclick="deleteItem()">
+            <input type="submit" name="dlt" value="Supprimer La Selection" id="d-btn" onclick="deleteItem()">
 
         </div>
         <div id="priceParam">
             <div id="priceList">
-                <label for="priceList"> Price </label></br>
+                <label for="priceList"> Prix </label></br>
                 <div id="listPrice">
                     
                 </div>
@@ -108,7 +108,7 @@
     <div id="formcontainer">
         <form method="POST" action=""> {% csrf_token %}
             {{form.as_p}} 
-            <input type="submit" name="valid" value="Send Info" id="vbtn">
+            <input type="submit" name="valid" value="Envoyer" id="vbtn">
             
         </form>
         

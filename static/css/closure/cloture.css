@@ -209,7 +209,7 @@ p label{
 	border-radius: 5px;
 	margin: 7px;
 	margin-left: 40%;
-	width: 70px;
+	width: 90px;
 	font-size: 20px;
 	background: skyblue;
 }
@@ -225,9 +225,13 @@ table,th {
 	border: 2px solid black;
 	border-collapse: collapse;
 	padding: 5px;
+	font-size: 15px;
 }
 
 td{
 	border-bottom: 1px solid black;
 	padding: 5px;
+}
+tr:hover{
+	background-color: whitesmoke;
 }

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+
 class Closure(models.Model):
 	creation_date = models.DateTimeField(auto_now_add=True)
 	username = models.ForeignKey(User, on_delete=models.CASCADE)

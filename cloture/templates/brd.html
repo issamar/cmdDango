@@ -3,12 +3,12 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Conventions Managment</title>
+	<title>Gestions Des Bordereaux</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/closure/brd.css' %}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-	<nav>
+		<nav>
 		<div class="logo">PharmaGest
 			<label class="user">({{user}})</label>
 		</div>
@@ -17,18 +17,19 @@
 		</label>
 		<input type="checkbox" id="btn" class="hiddenbtn">
 		<ul>
-			<li><a href="/">Home</a></li>
-			<li><a href="{% url 'easycmd'%} ">Orders</a></li>
+			<li><a href="/">Acceuil</a></li>
+			<li><a href="{% url 'easycmd'%}">Commande</a></li>
+			
 			<li>
 				
-				<label for="btn-1" class="show">Daily Data + </label>
-				<a href="#">Daily Data</a>
+				<label for="btn-1" class="show">Journal + </label>
+				<a href="#">Journal</a>
 				<input type="checkbox" id="btn-1" class="hiddenbtn">
 				<ul>
-					<li><a href="{% url 'cloture'%}">Close</a></li>
-					<li><a href="{% url 'visualiser'%} ">Edit Gap</a></li>
-					<li><a href="{% url 'visedit'%} ">Edit(All)</a></li>
-					<li><a href="{% url 'cashstat'%} ">Statistic</a></li>
+					<li><a href="{% url 'cloture'%}">Cloturer</a></li>
+					<li><a href="{% url 'visualiser'%} ">Editer l'écart</a></li>
+					<li><a href="{% url 'visedit'%} ">Editer tous</a></li>
+					<li><a href="{% url 'cashstat'%} ">Statistiques</a></li>
 				</ul>
 			</li>
 			<li>
@@ -36,9 +37,9 @@
 				<a href="#">Conventions</a>
 				<input type="checkbox" id="btn-2" class="hiddenbtn">
 				<ul>
-					<li><a href="{% url 'convention'%} ">Add Brd</a></li>
-					<li><a href="{% url 'convention'%}">Show Brd</a></li>
-					<li><a href="{% url 'stat'%}">Statistic</a></li>
+					<li><a href="{% url 'convention'%} ">Ajouter Brd</a></li>
+					<li><a href="{% url 'convention'%}">Afficher Brd</a></li>
+					<li><a href="{% url 'stat'%}">Statistiques</a></li>
 				</ul>
 			</li>
 			<li>
@@ -46,19 +47,19 @@
 				<a href="#">Lab</a>
 				<input type="checkbox" id="btn-3" class="hiddenbtn">
 				<ul>
-					<li><a href="{% url 'calclab'%}">Add Patient</a></li>
-					<li><a href="{% url 'vislab'%}">Show patients</a></li>
-					<li><a href="{% url 'labstat'%}">Statistic</a></li>
+					<li><a href="{% url 'calclab'%}">Ajout Patient</a></li>
+					<li><a href="{% url 'vislab'%}">Patients</a></li>
+					<li><a href="{% url 'labstat'%}">Statistiques</a></li>
 				</ul>
 			</li>
 			<li><a href="#">Contact</a></li>
-			<li><a href="{% url 'logout' %}">Logout</a></li>
+			<li><a href="{% url 'logout' %}">Déconnecter</a></li>
 		</ul>
 	</nav>
 	<div id="container">
 		<div id="aj_container">
 
-			<h2> Add a Convention Info </h2>
+			<h2> Ajouter Un Bordereau </h2>
 			<form method="POST" action="add/" id="aj_form">{% csrf_token %}
 				
 				{{form.as_p}}
@@ -79,19 +80,19 @@
 	<div id="disp_container">
 		<table class="table table-hover ">
 			<tr>
-				<th>Center</th>
-				<th>Slip N°</th>
-				<th>Closing Date</th>
-				<th>Pres.C</th>
-				<th>Slips Amount</th>
-				<th>Diposit Day</th>
-				<th>Sheet Date</th>
-				<th>Pres Sheet N°</th>
-				<th>Sheet Amount</th>
-				<th>Payment Day</th>
-				<th> Gap</th>
-				<th>Pres Gap</th>
-				<th>Pay Stat</th>
+				<th>Centre</th>
+				<th>N° Brd</th>
+				<th>Date Cloture</th>
+				<th>N° Ord</th>
+				<th>Montant Brd</th>
+				<th>Date Depot</th>
+				<th>Date Journal</th>
+				<th>N° Ord Journal</th>
+				<th>Montant Journal</th>
+				<th>Date Présumé Pay</th>
+				<th> Ecart</th>
+				<th>Ecart N° Ord </th>
+				<th>Pay Status</th>
 			</tr>
 			
 
@@ -129,7 +130,7 @@
 					<td> {{brd.dt_pay}} </td>
 					<td> {{brd.defr}} </td>
 					<td>{{brd.def_o}}</td>
-					<td >  {% if brd.payement == True %} Payed {%else%} Not Payed {% endif %}</td>
+					<td >  {% if brd.payement == True %} Payé {%else%} En Attente {% endif %}</td>
 				</tr>
 
 			{% endif %}

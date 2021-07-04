@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Statistics</title>
+	<title>Conventions Statistiques</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/closure/stat.css' %}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <body>
@@ -17,19 +17,19 @@
 		</label>
 		<input type="checkbox" id="btn" class="hiddenbtn">
 		<ul>
-			<li><a href="/">Home</a></li>
-			<li><a href="{% url 'easycmd'%}">Orders</a></li>
+			<li><a href="/">Acceuil</a></li>
+			<li><a href="{% url 'easycmd'%}">Commande</a></li>
 			
 			<li>
 				
-				<label for="btn-1" class="show">Daily Data + </label>
-				<a href="#">Daily Data</a>
+				<label for="btn-1" class="show">Journal + </label>
+				<a href="#">Journal</a>
 				<input type="checkbox" id="btn-1" class="hiddenbtn">
 				<ul>
-					<li><a href="{% url 'cloture'%}">Close</a></li>
-					<li><a href="{% url 'visualiser'%} ">Edit Gap</a></li>
-					<li><a href="{% url 'visedit'%} ">Edit(All)</a></li>
-					<li><a href="{% url 'cashstat'%} ">Statistic</a></li>
+					<li><a href="{% url 'cloture'%}">Cloturer</a></li>
+					<li><a href="{% url 'visualiser'%} ">Editer l'écart</a></li>
+					<li><a href="{% url 'visedit'%} ">Editer tous</a></li>
+					<li><a href="{% url 'cashstat'%} ">Statistiques</a></li>
 				</ul>
 			</li>
 			<li>
@@ -37,9 +37,9 @@
 				<a href="#">Conventions</a>
 				<input type="checkbox" id="btn-2" class="hiddenbtn">
 				<ul>
-					<li><a href="{% url 'convention'%} ">Add Brd</a></li>
-					<li><a href="{% url 'convention'%}">Show Brd</a></li>
-					<li><a href="{% url 'stat'%}">Statistic</a></li>
+					<li><a href="{% url 'convention'%} ">Ajouter Brd</a></li>
+					<li><a href="{% url 'convention'%}">Afficher Brd</a></li>
+					<li><a href="{% url 'stat'%}">Statistiques</a></li>
 				</ul>
 			</li>
 			<li>
@@ -47,25 +47,25 @@
 				<a href="#">Lab</a>
 				<input type="checkbox" id="btn-3" class="hiddenbtn">
 				<ul>
-					<li><a href="{% url 'calclab'%}">Add Patient</a></li>
-					<li><a href="{% url 'vislab'%}">Show patients</a></li>
-					<li><a href="{% url 'labstat'%}">Statistic</a></li>
+					<li><a href="{% url 'calclab'%}">Ajout Patient</a></li>
+					<li><a href="{% url 'vislab'%}">Patients</a></li>
+					<li><a href="{% url 'labstat'%}">Statistiques</a></li>
 				</ul>
 			</li>
 			<li><a href="#">Contact</a></li>
-			<li><a href="{% url 'logout' %}">Logout</a></li>
+			<li><a href="{% url 'logout' %}">Déconnecter</a></li>
 		</ul>
-	</nav>		
+	</nav>	
 	<div id="gcontainer">
 		<div id="container-1">
 			<form method="POST" action="">{% csrf_token %}
 				<div id="date-1">
-					<label for="depart"> from :</label>
+					<label for="depart"> De :</label>
 					<input type="date" name="depart" class="date">
 				</div>
 					
 				<div id="date-2">
-					<label for="fin"> Until :</label>
+					<label for="fin"> Jusqu'à :</label>
 					<input type="date" name="fin" class="date">
 				</div>
 					
@@ -76,9 +76,9 @@
 			<table class="table table-hover ">
 				<tr>
 					<th></th>
-					<th> Slips</th>
-					<th> Sheets </th>
-					<th>Return Not Processed</th>
+					<th> Bordereaux</th>
+					<th> Jornaux </th>
+					<th>retour Non Traiter</th>
 				</tr>
 
 				<tr>
@@ -96,7 +96,7 @@
 				</tr>
 
 				<tr>
-					<th>Military Convention</th>
+					<th>Convention Militaire</th>
 					<th>{{cmb}} </th>
 					<th> {{cmj}} </th>
 					<th> {{cme}} </th>
@@ -104,19 +104,19 @@
 			</table>
 		</div>
 		<div id="container-2">
-			<label> The Amount Of CNAS Convention : </label>
+			<label> Le Montant CNAS : </label>
 			<label style="font-weight: bold;"> {{cnast}} DA</label>
 			<br>
-			<label> The Amount Of CASNOS Convention : </label>
+			<label> Le Montant CASNOS : </label>
 			<label style="font-weight: bold;"> {{casnost}} DA</label>
 			<br>
-			<label> The Amount Of Military Convention: </label>
+			<label> Le Montant Caisse Militaire </label>
 			<label style="font-weight: bold;"> {{cm}} DA</label>
 			<br>
-			<label> Total is :  </label>
+			<label> Total est :  </label>
 			<label style="font-weight: bold;"> {{mtbrd}} DA</label>
 			<br>
-			<label> The Amount Of return Not Processed :  </label>
+			<label> Le Montant De Retour Non Traiter :  </label>
 			<label style="font-weight: bold;"> {{ecartt}} DA</label>
 
 	

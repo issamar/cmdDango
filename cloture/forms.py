@@ -46,12 +46,12 @@ class ClosureForm(forms.ModelForm):
 		}
 
 		labels = {
-			'start_money' : ("Start Money"),
-			'closure_money' : ("Closing Money"),
-			'closure_paper' : ("Closing Paper"),
-			'money' : ("Known Gap"),
-			'details' : ("Gap Details"),
-			'wasfa' : ("The Amount From The Managment App"),
+			'start_money' : ("Monais D'Ouverture"),
+			'closure_money' : ("Monais de Cloture"),
+			'closure_paper' : ("Biais de Cloure"),
+			'money' : ("Ecart Connu"),
+			'details' : ("Details d'Ecart"),
+			'wasfa' : ("Somme Sur Logiciel de Gestion"),
 
 		}
 
@@ -119,12 +119,12 @@ class BordereauxForm(forms.ModelForm):
 				}),
 		}
 		labels = {
-			'pay_ctr' : ("Payement center"),
-			'n_brd' : ("Slip Number"),
-			'dt_clo' : (" Slip Closing Date"),
-			'n_ord' : ("Prescription Count"),
-			'm_brd' : ("Slip Amount"),
-			'dt_depot' : ("Diposit Date(Slip)"),
+			'pay_ctr' : ("Centre Payement"),
+			'n_brd' : ("N° Brd"),
+			'dt_clo' : (" Date Cloture"),
+			'n_ord' : ("Nbr Ord "),
+			'm_brd' : ("Montant Brd"),
+			'dt_depot' : ("Date Depot"),
 			# 'dt_jrl' : ("Date du Journal"),
 			# 'n_ord_jrl' : ("Nombre d'Ordenance du Journal"),
 			# 'm_jrl' : ("Montant du Journal")

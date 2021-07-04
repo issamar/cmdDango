@@ -208,7 +208,7 @@ input {
 	height: 40px;
 	border-radius: 10px;
 	font-size: 18px;
-	padding: 0px;
+	padding: 3px;
 	outline: none;
 }
 select{
@@ -216,7 +216,9 @@ select{
 	border-radius: 10px;
 	font-size: 18px;
 	height: 40px;
-
+}
+#aj_form p{
+	text-align: center;
 }
 
 #nbrd{

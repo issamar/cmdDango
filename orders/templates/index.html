@@ -4,13 +4,13 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>EasyCmd</title>
+	<title>Commande</title>
 	<link rel="stylesheet" type="text/css" href="{% static '/css/orders/main.css'%}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 </head>
 <body >
-	<nav>
+		<nav>
 		<div class="logo">PharmaGest
 			<label class="user">({{user}})</label>
 		</div>
@@ -19,18 +19,19 @@
 		</label>
 		<input type="checkbox" id="btn" class="hiddenbtn">
 		<ul>
-			<li><a href="/">Home</a></li>
-			<li><a href="{% url 'easycmd'%} ">Orders</a></li>
+			<li><a href="/">Acceuil</a></li>
+			<li><a href="{% url 'easycmd'%}">Commande</a></li>
+			
 			<li>
 				
-				<label for="btn-1" class="show">Daily Data + </label>
-				<a href="#">Daily Data</a>
+				<label for="btn-1" class="show">Journal + </label>
+				<a href="#">Journal</a>
 				<input type="checkbox" id="btn-1" class="hiddenbtn">
 				<ul>
-					<li><a href="{% url 'cloture'%}">Close</a></li>
-					<li><a href="{% url 'visualiser'%} ">Edit Gap</a></li>
-					<li><a href="{% url 'visedit'%} ">Edit(All)</a></li>
-					<li><a href="{% url 'cashstat'%} ">Statistic</a></li>
+					<li><a href="{% url 'cloture'%}">Cloturer</a></li>
+					<li><a href="{% url 'visualiser'%} ">Editer l'écart</a></li>
+					<li><a href="{% url 'visedit'%} ">Editer tous</a></li>
+					<li><a href="{% url 'cashstat'%} ">Statistiques</a></li>
 				</ul>
 			</li>
 			<li>
@@ -38,9 +39,9 @@
 				<a href="#">Conventions</a>
 				<input type="checkbox" id="btn-2" class="hiddenbtn">
 				<ul>
-					<li><a href="{% url 'convention'%} ">Add Brd</a></li>
-					<li><a href="{% url 'convention'%}">Show Brd</a></li>
-					<li><a href="{% url 'stat'%}">Statistic</a></li>
+					<li><a href="{% url 'convention'%} ">Ajouter Brd</a></li>
+					<li><a href="{% url 'convention'%}">Afficher Brd</a></li>
+					<li><a href="{% url 'stat'%}">Statistiques</a></li>
 				</ul>
 			</li>
 			<li>
@@ -48,13 +49,13 @@
 				<a href="#">Lab</a>
 				<input type="checkbox" id="btn-3" class="hiddenbtn">
 				<ul>
-					<li><a href="{% url 'calclab'%}">Add Patient</a></li>
-					<li><a href="{% url 'vislab'%}">Show patients</a></li>
-					<li><a href="{% url 'labstat'%}">Statistic</a></li>
+					<li><a href="{% url 'calclab'%}">Ajout Patient</a></li>
+					<li><a href="{% url 'vislab'%}">Patients</a></li>
+					<li><a href="{% url 'labstat'%}">Statistiques</a></li>
 				</ul>
 			</li>
 			<li><a href="#">Contact</a></li>
-			<li><a href="{% url 'logout' %}">Logout</a></li>
+			<li><a href="{% url 'logout' %}">Déconnecter</a></li>
 		</ul>
 	</nav>
 	<div id="body">
