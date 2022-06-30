@@ -45,4 +45,4 @@ def logoutPage(request):
 
 @login_required(login_url='login')
 def accueil(request):
-	return render(request,"accueil.html")
+	return render(request,"acceuil/accueil.html")
